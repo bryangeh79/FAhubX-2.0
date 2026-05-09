@@ -13,7 +13,7 @@
 #define MyAppExeName "FAhubX.bat"
 
 [Setup]
-AppId={{B3F7A2D1-9E4C-4A6B-8D5F-1C2E3F4A5B6C}
+AppId={{FAB20200-2026-4A7B-8C9D-0E1F2A3B4C5D}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
@@ -128,7 +128,7 @@ begin
 
   AppPortLabel := TNewStaticText.Create(PortConfigPage);
   AppPortLabel.Parent := PortConfigPage.Surface;
-  AppPortLabel.Caption := 'FAhubX Web Port (default: 9600):';
+  AppPortLabel.Caption := 'FAhubX Web Port (default: 9688):';
   AppPortLabel.Top := 45;
   AppPortLabel.Left := 0;
 
@@ -137,11 +137,11 @@ begin
   AppPortEdit.Top := 65;
   AppPortEdit.Left := 0;
   AppPortEdit.Width := 120;
-  AppPortEdit.Text := '9600';
+  AppPortEdit.Text := '9688';
 
   PgPortLabel := TNewStaticText.Create(PortConfigPage);
   PgPortLabel.Parent := PortConfigPage.Surface;
-  PgPortLabel.Caption := 'PostgreSQL Port (default: 5433):';
+  PgPortLabel.Caption := 'PostgreSQL Port (default: 5450):';
   PgPortLabel.Top := 100;
   PgPortLabel.Left := 0;
 
@@ -150,11 +150,11 @@ begin
   PgPortEdit.Top := 120;
   PgPortEdit.Left := 0;
   PgPortEdit.Width := 120;
-  PgPortEdit.Text := '5433';
+  PgPortEdit.Text := '5450';
 
   RedisPortLabel := TNewStaticText.Create(PortConfigPage);
   RedisPortLabel.Parent := PortConfigPage.Surface;
-  RedisPortLabel.Caption := 'Redis Port (default: 6380):';
+  RedisPortLabel.Caption := 'Redis Port (default: 6388):';
   RedisPortLabel.Top := 155;
   RedisPortLabel.Left := 0;
 
@@ -163,7 +163,7 @@ begin
   RedisPortEdit.Top := 175;
   RedisPortEdit.Left := 0;
   RedisPortEdit.Width := 120;
-  RedisPortEdit.Text := '6380';
+  RedisPortEdit.Text := '6388';
 end;
 
 function NextButtonClick(CurPageID: Integer): Boolean;
