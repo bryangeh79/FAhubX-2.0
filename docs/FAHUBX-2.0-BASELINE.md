@@ -52,7 +52,7 @@
 | Phase 5B | Compile-safe isolation markers | Done |
 | Phase 5C | Dead-code removal + TS verification | Done |
 | Phase 5D | Cloud module cleanup + deletion | Done |
-| Phase 5E | Bull deps + remaining cloud dirs | Planned |
+| Phase 5E | Bull queue cleanup + vpn entity move | Done |
 | Phase 6 | Installer packaging | Planned |
 
 ---

@@ -162,7 +162,6 @@ export class VpnConfig {
   @DeleteDateColumn({ type: 'timestamptz', nullable: true })
   deletedAt: Date;
 
-  // 方法
   isActive(): boolean {
     return this.status === 'active' && this.enabled && !this.deletedAt;
   }
@@ -181,9 +180,7 @@ export class VpnConfig {
     if (success) {
       this.status = 'active';
       this.lastConnectedAt = new Date();
-      
       if (connectTime) {
-        // 更新平均连接时间
         if (!this.avgConnectTime) {
           this.avgConnectTime = connectTime;
         } else {
@@ -193,46 +190,24 @@ export class VpnConfig {
     } else {
       this.status = 'error';
     }
-
-    // 更新成功率
     const totalTests = (this.metadata?.totalTests || 0) + 1;
     const successfulTests = (this.metadata?.successfulTests || 0) + (success ? 1 : 0);
-    
-    this.metadata = {
-      ...this.metadata,
-      totalTests,
-      successfulTests,
-    };
-    
+    this.metadata = { ...this.metadata, totalTests, successfulTests };
     this.successRate = successfulTests / totalTests;
     this.updatedAt = new Date();
   }
 
   getConnectionString(): string {
     switch (this.protocol) {
-      case 'openvpn':
-        return `${this.protocol}://${this.server}:${this.port}`;
-      case 'wireguard':
-        return `${this.protocol}://${this.endpoint}`;
+      case 'openvpn': return `${this.protocol}://${this.server}:${this.port}`;
+      case 'wireguard': return `${this.protocol}://${this.endpoint}`;
       case 'ikev2':
-      case 'l2tp':
-        return `${this.protocol}://${this.server}`;
-      default:
-        return `${this.server}:${this.port}`;
+      case 'l2tp': return `${this.protocol}://${this.server}`;
+      default: return `${this.server}:${this.port}`;
     }
   }
 
   getConfigSummary(): string {
     return `${this.name} (${this.protocol} @ ${this.server}:${this.port}) - ${this.country}`;
-  }
-
-  encryptSensitiveData(): void {
-    // 这里应该实现加密逻辑
-    // 暂时留空，实际应用中应该加密敏感数据
-  }
-
-  decryptSensitiveData(): void {
-    // 这里应该实现解密逻辑
-    // 暂时留空，实际应用中应该解密敏感数据
   }
 }

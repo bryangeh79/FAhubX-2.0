@@ -21,16 +21,9 @@ import { SimpleTasksModule } from './modules/simple-tasks/simple-tasks.module';
 import { WarmupModule } from './modules/warmup/warmup.module';
 import { LicenseModule } from './modules/license/license.module';
 import { AdminLicensesModule } from './modules/admin-licenses/admin-licenses.module';
-// TODO(2.0): Phase 5E — remove these commented-out cloud/SaaS module files entirely
-// (source files still exist; Bull dependency blocks deletion until account-batch
-//  task-queue, task-scheduler dirs are removed together)
-// import { TaskSchedulerModule } from './modules/task-scheduler/task-scheduler.module';
-// import { TaskQueueModule } from './modules/task-queue/task-queue.module';
+// TODO(2.0): Phase 5E — remaining inactive modules (source files exist; review in Phase 6)
 // import { TaskExecutorModule } from './modules/task-executor/task-executor.module';
 // import { AccountManagerModule } from './modules/account-manager/account-manager.module';
-// import { TaskMonitorModule } from './modules/task-monitor/task-monitor.module';
-// import { BatchOperationsModule } from './modules/batch-operations/batch-operations.module';
-// import { AccountBatchModule } from './modules/account-batch/account-batch.module';
 // import { AccountHealthModule } from './modules/account-health/account-health.module';
 // import { AccountRecoveryModule } from './modules/account-recovery/account-recovery.module';
 
@@ -106,13 +99,8 @@ import { AdminLicensesModule } from './modules/admin-licenses/admin-licenses.mod
     // License 模块（local 和 cloud 模式都加载，但 service 内部自动跳过 cloud 逻辑）
     LicenseModule,
     AdminLicensesModule,
-    // TaskSchedulerModule,
-    // TaskQueueModule,
     // TaskExecutorModule,
     // AccountManagerModule,
-    // TaskMonitorModule,
-    // BatchOperationsModule,
-    // AccountBatchModule,
     // AccountHealthModule,
     // AccountRecoveryModule,
   ],

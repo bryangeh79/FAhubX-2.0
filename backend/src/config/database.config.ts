@@ -20,7 +20,6 @@ export class DatabaseConfig implements TypeOrmOptionsFactory {
         join(__dirname, '../modules/users/**/*.entity{.ts,.js}'),
         join(__dirname, '../modules/facebook-accounts/**/*.entity{.ts,.js}'),
         join(__dirname, '../modules/vpn/**/*.entity{.ts,.js}'),
-        join(__dirname, '../modules/vpn-integration/entities/vpn-config.entity{.ts,.js}'),
         join(__dirname, '../modules/task-scheduler/**/*.entity{.ts,.js}'),
         join(__dirname, '../modules/chat-scripts/**/*.entity{.ts,.js}'),
         join(__dirname, '../modules/warmup/**/*.entity{.ts,.js}'),

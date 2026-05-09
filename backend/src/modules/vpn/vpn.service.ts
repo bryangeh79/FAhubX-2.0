@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
-import { VpnConfig } from '../vpn-integration/entities/vpn-config.entity';
+import { VpnConfig } from './entities/vpn-config.entity';
 
 @Injectable()
 export class VpnService {

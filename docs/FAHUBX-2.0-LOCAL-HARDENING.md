@@ -1,8 +1,8 @@
 # FAhubX 2.0 — Local Deployment Hardening Plan
 
 **Date:** 2026-05-10
-**Phase:** 5D — Final cloud module cleanup (updated)
-**Status:** Phases 5A–5D complete; Phase 5E planned
+**Phase:** 5E — Bull queue cleanup + entity move (updated)
+**Status:** Phases 5A–5E complete; Phase 6 (installer packaging) next
 
 ---
 
@@ -169,7 +169,12 @@ and `installer/staging/redis/` are used instead of Docker.
 | Disable AdminUsersPage route in App.tsx | ✅ Done (Phase 5C) |
 | DEPLOY_MODE default to local | ✅ Done (Phase 5A) |
 | VpnModule classified as KEEP | ✅ Confirmed (Phase 5D) — user VPN proxy config |
-| Prune @nestjs/bull, bull packages | ⏳ Phase 5E — blocked by account-batch/task-queue/task-scheduler files |
+| Prune @nestjs/bull, bull packages | ✅ Done (Phase 5E) — removed from package.json after source deletion |
+| Delete account-batch/, task-monitor/, task-queue/ | ✅ Done (Phase 5E) |
+| Delete batch-operations/ | ✅ Done (Phase 5E) |
+| Delete task-scheduler/module+service+controller | ✅ Done (Phase 5E, entities/interfaces/dto kept) |
+| Move vpn-config.entity.ts → vpn/entities/ | ✅ Done (Phase 5E) |
+| Delete vpn-integration/ directory | ✅ Done (Phase 5E, now empty) |
 
 ---
 
