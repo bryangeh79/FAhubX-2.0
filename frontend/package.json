@@ -1,7 +1,7 @@
 {
-  "name": "facebook-auto-bot-frontend",
+  "name": "fahubx-2-frontend",
   "version": "1.0.0",
-  "description": "Facebook Auto Bot SaaS Platform - Frontend",
+  "description": "FAhubX 2.0 - Local Windows Deployment Frontend",
   "type": "module",
   "scripts": {
     "dev": "vite",

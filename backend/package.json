@@ -1,7 +1,7 @@
 {
-  "name": "facebook-auto-bot-backend",
+  "name": "fahubx-2-backend",
   "version": "1.0.0",
-  "description": "Facebook Auto Bot SaaS Platform - Backend",
+  "description": "FAhubX 2.0 - Local Windows Deployment Backend",
   "main": "dist/main.js",
   "scripts": {
     "build": "nest build",

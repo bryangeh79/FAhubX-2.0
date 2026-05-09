@@ -1,80 +1,119 @@
-# Facebook Auto Bot - 多租户SaaS平台
+# FAhubX 2.0
 
-## 项目概述
-Facebook自动化机器人SaaS平台，为企业和个人提供Facebook页面自动化管理服务。
+**FAhubX 2.0** is a new independent engineering line of the FAhubX Facebook automation platform, redesigned for **local Windows deployment** with **Cloudflare-managed licensing**.
 
-## 核心功能
-- ✅ 多租户架构，数据完全隔离
-- ✅ Facebook页面/账号管理
-- ✅ 自动化内容发布
-- ✅ 智能消息回复
-- ✅ 数据分析与报告
-- ✅ 团队协作管理
+> **Lineage note:** FAhubX 1.0 is preserved untouched at `C:\AI_WORKSPACE\Facebook Auto Bot` / `C:\FAhubX`. This repo is an independent 2.0 branch and does not modify any 1.0 source or runtime.
 
-## 技术栈
-### 后端
-- Node.js 20+ with TypeScript
-- NestJS框架
-- PostgreSQL数据库
-- Redis缓存
-- Bull任务队列
+---
 
-### 前端
-- React 18+ with TypeScript
-- Ant Design组件库
-- Vite构建工具
-- PWA支持
+## What Changed from 1.0?
 
-### 基础设施
-- Docker容器化
-- Kubernetes编排
-- GitHub Actions CI/CD
-- AWS/Azure/GCP部署
+| Aspect | FAhubX 1.0 | FAhubX 2.0 |
+|---|---|---|
+| Deployment | VPS / Cloud SaaS | Local Windows app |
+| License control | Embedded in backend | Cloudflare Workers + D1 |
+| Database | Remote PostgreSQL (VPS) | Local PostgreSQL (bundled) |
+| Cache | Remote Redis (VPS) | Local Redis (bundled) |
+| Multi-tenant | Admin manages all tenants | Each install = one tenant |
+| Distribution | SSH / PM2 on VPS | Windows installer (.exe) |
 
-## 项目结构
+---
+
+## Architecture
+
 ```
-Facebook Auto Bot/
-├── backend/           # 后端服务
-├── frontend/          # 前端应用
-├── infrastructure/    # 基础设施配置
-├── docs/             # 项目文档
-└── README.md         # 项目说明
+Customer Windows Machine
+  ├── FAhubX Backend   (NestJS + TypeORM, localhost:3000)
+  ├── FAhubX Frontend  (React + Vite, served locally)
+  ├── PostgreSQL       (portable, bundled by installer)
+  ├── Redis            (portable, bundled by installer)
+  └── Puppeteer        (Chromium, browser profile isolation)
+
+          │  HTTPS heartbeat every 30 min
+          ▼
+
+  Cloudflare License Server  (Workers + D1)
+  ├── License activation + device binding
+  ├── Plan enforcement (Basic / Pro / Enterprise)
+  ├── Expiry checking
+  ├── 30-min heartbeat ingestion
+  └── 24-hour offline grace period
 ```
 
-## 快速开始
+---
+
+## Repository Structure
+
+```
+FAhubX-2.0/
+├── backend/          # NestJS backend (local runtime)
+├── frontend/         # React frontend (served from localhost)
+├── license-server/   # Cloudflare Workers + D1 license service
+├── installer/        # Windows installer (Inno Setup + staged assets)
+└── docs/             # Architecture and phase documentation
+```
+
+---
+
+## Plan Tiers
+
+| Plan | Max Accounts | Max Tasks | Max Scripts |
+|------|-------------|-----------|-------------|
+| Basic | 10 | 50 | 10 |
+| Pro | 30 | 200 | 50 |
+| Enterprise | 50 | 300 | 100 |
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Backend | NestJS, TypeORM, PostgreSQL, Redis |
+| Frontend | React 18, Ant Design, Vite, TypeScript |
+| Automation | Puppeteer (headless / headed Chromium) |
+| License server | Cloudflare Workers, Cloudflare D1 |
+| Installer | Inno Setup (Windows .exe) |
+| i18n | react-i18next (en / zh / vi) |
+
+---
+
+## Local Development
+
 ```bash
-# 开发环境启动
-cd backend && npm install && npm run dev
+# Backend
+cd backend && npm install && cp .env.local.example .env && npm run start:dev
+
+# Frontend
 cd frontend && npm install && npm run dev
 
-# Docker启动
-docker-compose up -d
+# License server (Cloudflare Workers)
+cd license-server && npm install && npm run dev
 ```
 
-## 开发路线图
-### Phase 1: 基础架构 (2-3周)
-- [ ] 项目初始化与配置
-- [ ] 数据库设计与迁移
-- [ ] 用户认证系统
-- [ ] 租户管理基础
+---
 
-### Phase 2: 核心功能 (3-4周)
-- [ ] Facebook API集成
-- [ ] 自动化任务管理
-- [ ] 内容发布功能
-- [ ] 基础Dashboard
+## Phase Status
 
-### Phase 3: 增强功能 (2-3周)
-- [ ] 数据分析报告
-- [ ] 高级调度功能
-- [ ] 模板系统
-- [ ] 团队协作功能
+| Phase | Description | Status |
+|---|---|---|
+| Phase 1 | Baseline survey | Done |
+| Phase 2A | Git repo initialization | Done |
+| Phase 3 | Identity + architecture docs | Done |
+| Phase 4 | VPS/cloud isolation audit | Planned |
+| Phase 5 | Local deployment hardening | Planned |
+| Phase 6 | Installer packaging | Planned |
 
-## 环境要求
-- Node.js 20+
-- PostgreSQL 15+
-- Redis 7+
-- Docker 24+
+---
 
-## 许可证
-MIT
+## Safety Boundaries
+
+- Do not modify `C:\AI_WORKSPACE\Facebook Auto Bot` (FAhubX 1.0 source)
+- Do not modify `C:\FAhubX` (FAhubX 1.0 local runtime)
+- Do not commit `.env` files, license keys, or credentials
+
+---
+
+## License
+
+Proprietary — FAhubX / Starbright Solutions
