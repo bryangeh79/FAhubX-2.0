@@ -1,0 +1,8 @@
+# Build artifacts
+staging/
+output/
+deps/
+node_modules/
+
+# Temp files
+*.log

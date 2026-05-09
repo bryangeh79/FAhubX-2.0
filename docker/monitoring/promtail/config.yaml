@@ -1,0 +1,110 @@
+# Facebook Auto Bot Promtail 配置
+
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  # 系统日志
+  - job_name: system
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: system
+          __path__: /var/log/*.log
+
+  # Docker 容器日志
+  - job_name: docker
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+        refresh_interval: 5s
+    relabel_configs:
+      - source_labels: ['__meta_docker_container_name']
+        regex: '/(.*)'
+        target_label: 'container'
+      - source_labels: ['__meta_docker_container_image']
+        target_label: 'image'
+      - source_labels: ['__meta_docker_container_label_com_docker_compose_service']
+        target_label: 'service'
+      - source_labels: ['__meta_docker_container_label_com_docker_compose_project']
+        target_label: 'project'
+
+  # 应用日志
+  - job_name: applications
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: applications
+          __path__: /var/log/applications/*.log
+
+  # Nginx 访问日志
+  - job_name: nginx
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: nginx
+          __path__: /var/log/nginx/access.log
+
+  # Nginx 错误日志
+  - job_name: nginx-errors
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: nginx-errors
+          __path__: /var/log/nginx/error.log
+
+  # 后端应用日志
+  - job_name: backend
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: backend
+          service: backend
+          __path__: /var/log/backend/*.log
+
+  # 前端应用日志
+  - job_name: frontend
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: frontend
+          service: frontend
+          __path__: /var/log/frontend/*.log
+
+pipeline_stages:
+  # 解析 Docker 日志格式
+  - docker: {}
+
+  # 添加时间戳
+  - timestamp:
+      source: time
+      format: RFC3339
+
+  # 解析 JSON 格式日志
+  - json:
+      expressions:
+        level: level
+        msg: msg
+        service: service
+        timestamp: timestamp
+
+  # 标签提取
+  - labels:
+      level:
+      service:
+
+  # 输出格式
+  - output:
+      source: msg

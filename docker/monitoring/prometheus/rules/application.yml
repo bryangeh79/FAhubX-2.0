@@ -1,0 +1,137 @@
+# Facebook Auto Bot 应用告警规则
+
+groups:
+  # 应用健康告警
+  - name: application_health
+    rules:
+      - alert: BackendDown
+        expr: up{job="backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: backend
+        annotations:
+          summary: "后端服务不可用"
+          description: "后端服务 {{ $labels.instance }} 已宕机超过1分钟"
+          
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "高错误率检测"
+          description: "后端服务错误率超过5% (当前: {{ $value | humanizePercentage }})"
+          
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "高响应时间"
+          description: "95%的请求响应时间超过2秒 (当前: {{ $value }}秒)"
+
+  # 数据库告警
+  - name: database_health
+    rules:
+      - alert: PostgreSQLDown
+        expr: up{job="postgres"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: postgres
+        annotations:
+          summary: "PostgreSQL 数据库不可用"
+          description: "PostgreSQL 数据库 {{ $labels.instance }} 已宕机超过1分钟"
+          
+      - alert: HighPostgreSQLConnections
+        expr: pg_stat_database_numbackends{datname="fbautobot_production"} > 50
+        for: 5m
+        labels:
+          severity: warning
+          service: postgres
+        annotations:
+          summary: "高数据库连接数"
+          description: "数据库连接数超过50 (当前: {{ $value }})"
+          
+      - alert: PostgreSQLDeadlocks
+        expr: increase(pg_stat_database_deadlocks[5m]) > 0
+        labels:
+          severity: warning
+          service: postgres
+        annotations:
+          summary: "数据库死锁检测"
+          description: "检测到数据库死锁"
+
+  # Redis 告警
+  - name: redis_health
+    rules:
+      - alert: RedisDown
+        expr: up{job="redis"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: redis
+        annotations:
+          summary: "Redis 不可用"
+          description: "Redis 服务 {{ $labels.instance }} 已宕机超过1分钟"
+          
+      - alert: HighRedisMemoryUsage
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          service: redis
+        annotations:
+          summary: "高Redis内存使用率"
+          description: "Redis内存使用率超过80% (当前: {{ $value | humanizePercentage }})"
+          
+      - alert: RedisKeyEviction
+        expr: increase(redis_evicted_keys_total[5m]) > 100
+        labels:
+          severity: warning
+          service: redis
+        annotations:
+          summary: "Redis键驱逐"
+          description: "Redis在5分钟内驱逐了超过100个键"
+
+  # 基础设施告警
+  - name: infrastructure_health
+    rules:
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "高CPU使用率"
+          description: "CPU使用率超过80% (当前: {{ $value }}%)"
+          
+      - alert: HighMemoryUsage
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes > 0.8
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "高内存使用率"
+          description: "内存使用率超过80% (当前: {{ $value | humanizePercentage }})"
+          
+      - alert: HighDiskUsage
+        expr: (node_filesystem_size_bytes{fstype!="tmpfs"} - node_filesystem_free_bytes{fstype!="tmpfs"}) / node_filesystem_size_bytes{fstype!="tmpfs"} > 0.85
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "高磁盘使用率"
+          description: "磁盘使用率超过85% (当前: {{ $value | humanizePercentage }})"
+          
+      - alert: ServiceRestartFrequent
+        expr: changes(container_last_seen{name=~".*"}[1h]) > 5
+        labels:
+          severity: warning
+        annotations:
+          summary: "服务频繁重启"
+          description: "服务在1小时内重启超过5次"

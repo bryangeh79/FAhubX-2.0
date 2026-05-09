@@ -1,0 +1,397 @@
+[
+  {
+    "id": "script_001",
+    "name": "早安问候",
+    "description": "简单的早安问候对话，适合朋友之间",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "morning",
+    "estimated_duration": 5,
+    "difficulty": "easy",
+    "tags": ["问候", "日常", "简单"],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "早安！今天天气不错呢",
+        "delay_seconds": 2,
+        "variations": [
+          "早上好！今天天气真好",
+          "早安！新的一天开始了",
+          "嗨，早上好！今天感觉怎么样"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "是啊，阳光很好。你吃早餐了吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "对啊，天气真不错。你吃早餐了吗？",
+          "嗯，今天天气确实好。早餐吃了吗？",
+          "早上好！我还没吃早餐呢"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "刚吃完，喝了咖啡。你呢？",
+        "delay_seconds": 2,
+        "variations": [
+          "吃过了，喝了杯咖啡。你呢？",
+          "刚吃完早餐，喝了咖啡。你吃了吗？",
+          "吃了，喝了咖啡提神。你呢？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "我也刚吃完，准备开始工作了",
+        "delay_seconds": 3,
+        "variations": [
+          "我也吃过了，准备开始工作",
+          "刚吃完，要开始工作了",
+          "吃了，现在要开始工作了"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "好的，祝你工作顺利！",
+        "delay_seconds": 2,
+        "variations": [
+          "好的，工作顺利！",
+          "嗯，祝你工作顺利！",
+          "好的，祝你今天工作顺利！"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "谢谢，你也是！",
+        "delay_seconds": 2,
+        "variations": [
+          "谢谢，你也一样！",
+          "谢谢，祝你也有美好的一天！",
+          "谢谢，你也是！"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "script_002",
+    "name": "周末计划讨论",
+    "description": "讨论周末计划的对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "afternoon",
+    "estimated_duration": 8,
+    "difficulty": "easy",
+    "tags": ["周末", "计划", "休闲"],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "周末有什么计划吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "周末打算做什么？",
+          "这周末有什么安排吗？",
+          "周末有什么计划？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "还没想好呢，可能在家休息。你呢？",
+        "delay_seconds": 3,
+        "variations": [
+          "还没决定，可能在家休息。你呢？",
+          "还没想好，可能休息一下。你有什么计划？",
+          "不确定，可能在家。你呢？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "我想去看电影，最近有新片上映",
+        "delay_seconds": 2,
+        "variations": [
+          "打算去看电影，有新片上映",
+          "我想去看电影，有新电影",
+          "计划去看电影，有新片"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "听起来不错，什么电影？",
+        "delay_seconds": 3,
+        "variations": [
+          "不错啊，什么电影？",
+          "挺好的，是哪部电影？",
+          "听起来不错，是什么电影？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最新的科幻片，评价好像不错",
+        "delay_seconds": 2,
+        "variations": [
+          "最新的科幻电影，评价挺好",
+          "一部科幻片，评价不错",
+          "科幻电影，听说评价很好"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "那我也考虑一下，看完告诉我怎么样",
+        "delay_seconds": 3,
+        "variations": [
+          "我也考虑看看，看完分享感受",
+          "我可能也会去看，看完告诉我",
+          "考虑一下，看完告诉我怎么样"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "好的，一定告诉你",
+        "delay_seconds": 2,
+        "variations": [
+          "好的，看完告诉你",
+          "没问题，看完分享",
+          "好的，一定分享"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "script_003",
+    "name": "工作项目讨论",
+    "description": "同事之间讨论工作项目的对话",
+    "category": "business",
+    "relationship": "colleagues",
+    "time_of_day": "any",
+    "estimated_duration": 10,
+    "difficulty": "medium",
+    "tags": ["工作", "项目", "讨论"],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "关于新项目，你有什么想法？",
+        "delay_seconds": 3,
+        "variations": [
+          "新项目你有什么想法？",
+          "对于新项目，你有什么建议？",
+          "新项目，你的看法是什么？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "我觉得我们需要先明确需求",
+        "delay_seconds": 4,
+        "variations": [
+          "我认为应该先明确需求",
+          "我觉得需求需要先明确",
+          "应该先明确项目需求"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "同意，我已经整理了一些初步需求",
+        "delay_seconds": 3,
+        "variations": [
+          "同意，我整理了一些初步需求",
+          "是的，我准备了一些需求文档",
+          "同意，我有一些初步需求"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "太好了，我们可以明天开会讨论",
+        "delay_seconds": 4,
+        "variations": [
+          "很好，明天开会讨论吧",
+          "不错，明天可以开会讨论",
+          "好的，明天开会详细讨论"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "好的，我安排一下会议",
+        "delay_seconds": 3,
+        "variations": [
+          "好的，我来安排会议",
+          "没问题，我安排会议",
+          "好的，会议我来安排"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "谢谢，期待明天的讨论",
+        "delay_seconds": 3,
+        "variations": [
+          "谢谢，期待明天讨论",
+          "感谢，期待明天会议",
+          "谢谢，明天见"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "script_004",
+    "name": "兴趣爱好分享",
+    "description": "分享兴趣爱好的对话",
+    "category": "hobby",
+    "relationship": "acquaintances",
+    "time_of_day": "evening",
+    "estimated_duration": 12,
+    "difficulty": "easy",
+    "tags": ["兴趣", "爱好", "分享"],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 3,
+        "variations": [
+          "你平时喜欢做什么？",
+          "你有什么兴趣爱好？",
+          "你业余时间喜欢做什么？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "我喜欢读书和看电影，你呢？",
+        "delay_seconds": 4,
+        "variations": [
+          "我喜欢看书和电影，你呢？",
+          "我爱好读书和看电影，你呢？",
+          "我喜欢阅读和看电影，你呢？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "我也喜欢看电影，最近看了什么好电影？",
+        "delay_seconds": 3,
+        "variations": [
+          "我也爱看电影，最近看了什么？",
+          "我也喜欢电影，最近有什么推荐？",
+          "我也爱看电影，最近看了什么好片？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近看了一部科幻片，很不错",
+        "delay_seconds": 4,
+        "variations": [
+          "最近看了部科幻片，很好",
+          "刚看了一部科幻电影，不错",
+          "最近看了科幻片，挺好的"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "是吗？我也喜欢科幻片，叫什么名字？",
+        "delay_seconds": 3,
+        "variations": [
+          "真的？我也喜欢科幻，片名是？",
+          "是吗？我也爱科幻片，叫什么？",
+          "真的？我也喜欢科幻电影，片名？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "叫《星际探索》，推荐你看",
+        "delay_seconds": 4,
+        "variations": [
+          "《星际探索》，推荐你看",
+          "是《星际探索》，推荐",
+          "叫《星际探索》，值得一看"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "谢谢推荐，我会找时间看的",
+        "delay_seconds": 3,
+        "variations": [
+          "谢谢推荐，我会看的",
+          "感谢推荐，我会找时间看",
+          "谢谢，我会找时间看看"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "script_005",
+    "name": "健身话题讨论",
+    "description": "讨论健身和健康的对话",
+    "category": "hobby",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 10,
+    "difficulty": "medium",
+    "tags": ["健身", "健康", "运动"],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你最近有健身吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "最近在健身吗？",
+          "你有健身的习惯吗？",
+          "最近锻炼吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "有啊，每周去健身房三次",
+        "delay_seconds": 4,
+        "variations": [
+          "有的，每周健身三次",
+          "是的，每周去三次健身房",
+          "有健身，每周三次"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "真不错，我最近也开始健身了",
+        "delay_seconds": 3,
+        "variations": [
+          "很好，我也刚开始健身",
+          "不错，我最近也开始锻炼",
+          "真好，我也刚开始健身"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "加油！健身对身体很好",
+        "delay_seconds": 4,
+        "variations": [
+          "加油！健身有益健康",
+          "坚持！健身对身体好",
+          "加油！健身很重要"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "谢谢，我会坚持的",
+        "delay_seconds": 3,
+        "variations": [
+          "谢谢，我会坚持",
+          "感谢，我会坚持下去",
+          "谢谢，我会努力坚持"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "有什么问题可以问我",
+        "delay_seconds": 4,
+        "variations": [
+          "有问题可以问我",
+          "需要帮助可以问我",
+          "有疑问可以问我"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "好的，谢谢你的帮助",
+        "delay_seconds": 3,
+        "variations": [
+          "好的，谢谢",
+          "好的，感谢帮助",
+          "好的，谢谢你"
+        ]
+      }
+    ]
+  }
+]

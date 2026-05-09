@@ -1,0 +1,576 @@
+}-${dayjs().format('YYYY-MM-DD')}.json`;
+    
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
+    
+    message.success('配置导出成功');
+  };
+
+  // 导入配置
+  const handleImportClick = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = async (e: any) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      try {
+        const text = await file.text();
+        const config = JSON.parse(text);
+        
+        // 验证配置格式
+        if (!config.name || !config.deviceSimulation || !config.browserFingerprint) {
+          throw new Error('配置文件格式不正确');
+        }
+        
+        // 移除可能存在的id和日期字段
+        delete config.id;
+        delete config.createdAt;
+        delete config.updatedAt;
+        config.accounts = [];
+        
+        createForm.setFieldsValue(config);
+        setIsCreateModalVisible(true);
+        message.success('配置导入成功，请完善信息后保存');
+      } catch (error: any) {
+        message.error(`导入失败: ${error.message || '文件格式错误'}`);
+      }
+    };
+    input.click();
+  };
+
+  // 表格列定义
+  const columns = [
+    {
+      title: '配置名称',
+      dataIndex: 'name',
+      key: 'name',
+      render: (text: string, record: AntiDetectionConfig) => (
+        <Space>
+          <Text strong>{text}</Text>
+          {record.enabled ? (
+            <Badge status="success" text="启用" />
+          ) : (
+            <Badge status="default" text="禁用" />
+          )}
+        </Space>
+      ),
+    },
+    {
+      title: '设备类型',
+      dataIndex: 'deviceSimulation',
+      key: 'deviceType',
+      render: (deviceSimulation: DeviceSimulation) => {
+        const icons = {
+          desktop: <DesktopOutlined />,
+          mobile: <MobileOutlined />,
+          tablet: <TabletOutlined />,
+        };
+        const osIcons = {
+          windows: <WindowsOutlined />,
+          macos: <AppleOutlined />,
+          linux: <LinuxOutlined />,
+          android: <AndroidOutlined />,
+          ios: <AppleOutlined />,
+        };
+        const browserIcons = {
+          chrome: <ChromeOutlined />,
+          firefox: <FirefoxOutlined />,
+          safari: <SafariOutlined />,
+          edge: <GlobalOutlined />,
+        };
+        
+        return (
+          <Space>
+            <Tooltip title="设备类型">{icons[deviceSimulation.deviceType]}</Tooltip>
+            <Tooltip title="操作系统">{osIcons[deviceSimulation.os]}</Tooltip>
+            <Tooltip title="浏览器">{browserIcons[deviceSimulation.browser]}</Tooltip>
+            <Text>{deviceSimulation.osVersion}</Text>
+          </Space>
+        );
+      },
+    },
+    {
+      title: '浏览器指纹',
+      dataIndex: 'browserFingerprint',
+      key: 'browser',
+      render: (fingerprint: BrowserFingerprint) => (
+        <Tooltip title={fingerprint.userAgent}>
+          <Text ellipsis style={{ maxWidth: 200 }}>
+            {fingerprint.userAgent.split('(')[0]}
+          </Text>
+        </Tooltip>
+      ),
+    },
+    {
+      title: '关联账号',
+      dataIndex: 'accounts',
+      key: 'accounts',
+      render: (accounts: string[]) => (
+        <Tag color="blue">{accounts.length} 个账号</Tag>
+      ),
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      render: (date: string) => dayjs(date).format('YYYY-MM-DD HH:mm'),
+    },
+    {
+      title: '状态',
+      dataIndex: 'enabled',
+      key: 'enabled',
+      render: (enabled: boolean) => (
+        enabled ? (
+          <Tag icon={<CheckCircleOutlined />} color="success">
+            启用
+          </Tag>
+        ) : (
+          <Tag icon={<ExclamationCircleOutlined />} color="default">
+            禁用
+          </Tag>
+        )
+      ),
+    },
+    {
+      title: '操作',
+      key: 'action',
+      render: (_: any, record: AntiDetectionConfig) => (
+        <Space size="small">
+          <Tooltip title="查看详情">
+            <Button
+              type="text"
+              icon={<EyeOutlined />}
+              onClick={() => handleViewDetail(record)}
+            />
+          </Tooltip>
+          <Tooltip title="编辑">
+            <Button
+              type="text"
+              icon={<EditOutlined />}
+              onClick={() => handleEditClick(record)}
+            />
+          </Tooltip>
+          <Tooltip title="复制">
+            <Button
+              type="text"
+              icon={<CopyOutlined />}
+              onClick={() => handleCopyClick(record)}
+            />
+          </Tooltip>
+          <Tooltip title="测试配置">
+            <Button
+              type="text"
+              icon={<PlayCircleOutlined />}
+              onClick={() => handleTestClick(record)}
+            />
+          </Tooltip>
+          <Tooltip title="批量应用">
+            <Button
+              type="text"
+              icon={<SafetyOutlined />}
+              onClick={() => handleBatchApplyClick(record)}
+            />
+          </Tooltip>
+          <Tooltip title="导出配置">
+            <Button
+              type="text"
+              icon={<ExportOutlined />}
+              onClick={() => handleExportClick(record)}
+            />
+          </Tooltip>
+          <Popconfirm
+            title="确定要删除这个配置吗？"
+            onConfirm={() => handleDeleteClick(record.id)}
+            okText="确定"
+            cancelText="取消"
+          >
+            <Tooltip title="删除">
+              <Button type="text" danger icon={<DeleteOutlined />} />
+            </Tooltip>
+          </Popconfirm>
+        </Space>
+      ),
+    },
+  ];
+
+  // 设备图标映射
+  const deviceIconMap = {
+    desktop: <DesktopOutlined />,
+    mobile: <MobileOutlined />,
+    tablet: <TabletOutlined />,
+  };
+
+  const osIconMap = {
+    windows: <WindowsOutlined />,
+    macos: <AppleOutlined />,
+    linux: <LinuxOutlined />,
+    android: <AndroidOutlined />,
+    ios: <AppleOutlined />,
+  };
+
+  const browserIconMap = {
+    chrome: <ChromeOutlined />,
+    firefox: <FirefoxOutlined />,
+    safari: <SafariOutlined />,
+    edge: <GlobalOutlined />,
+  };
+
+  return (
+    <AppLayout>
+      <Card>
+        <Row justify="space-between" align="middle" style={{ marginBottom: 24 }}>
+          <Col>
+            <Space>
+              <Title level={2} style={{ margin: 0 }}>
+                <SafetyOutlined /> 反检测配置管理
+              </Title>
+              <Text type="secondary">
+                管理浏览器指纹、行为模拟和设备伪装配置
+              </Text>
+            </Space>
+          </Col>
+          <Col>
+            <Space>
+              <Button
+                icon={<ImportOutlined />}
+                onClick={handleImportClick}
+              >
+                导入配置
+              </Button>
+              <Button
+                type="primary"
+                icon={<PlusOutlined />}
+                onClick={handleCreateClick}
+              >
+                创建配置
+              </Button>
+            </Space>
+          </Col>
+        </Row>
+
+        {/* 统计信息 */}
+        <Row gutter={16} style={{ marginBottom: 24 }}>
+          <Col span={6}>
+            <Card size="small">
+              <Statistic
+                title="总配置数"
+                value={total}
+                prefix={<SafetyOutlined />}
+              />
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card size="small">
+              <Statistic
+                title="启用配置"
+                value={configs.filter(c => c.enabled).length}
+                prefix={<CheckCircleOutlined />}
+                valueStyle={{ color: '#3f8600' }}
+              />
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card size="small">
+              <Statistic
+                title="关联账号总数"
+                value={configs.reduce((sum, c) => sum + c.accounts.length, 0)}
+                prefix={<UserOutlined />}
+              />
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card size="small">
+              <Statistic
+                title="今日测试次数"
+                value={0}
+                prefix={<PlayCircleOutlined />}
+              />
+            </Card>
+          </Col>
+        </Row>
+
+        {/* 配置列表 */}
+        <Table
+          columns={columns}
+          dataSource={configs}
+          rowKey="id"
+          loading={loading}
+          pagination={{
+            current: page,
+            pageSize,
+            total,
+            onChange: handlePageChange,
+            showSizeChanger: false,
+            showTotal: (total) => `共 ${total} 条配置`,
+          }}
+        />
+
+        {/* 创建配置模态框 */}
+        <Modal
+          title="创建反检测配置"
+          open={isCreateModalVisible}
+          onCancel={() => setIsCreateModalVisible(false)}
+          footer={null}
+          width={800}
+          destroyOnClose
+        >
+          <Tabs defaultActiveKey="1">
+            <TabPane tab="预设模板" key="1">
+              <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
+                {presetTemplates.map(template => (
+                  <Col span={8} key={template.id}>
+                    <Card
+                      hoverable
+                      onClick={() => handleUseTemplate(template)}
+                      style={{ height: '100%' }}
+                    >
+                      <Card.Meta
+                        avatar={deviceIconMap[template.deviceSimulation.deviceType]}
+                        title={template.name}
+                        description={
+                          <Text ellipsis type="secondary">
+                            {template.description}
+                          </Text>
+                        }
+                      />
+                      <Divider style={{ margin: '12px 0' }} />
+                      <Space direction="vertical" size="small" style={{ width: '100%' }}>
+                        <Space>
+                          {osIconMap[template.deviceSimulation.os]}
+                          <Text>{template.deviceSimulation.os}</Text>
+                        </Space>
+                        <Space>
+                          {browserIconMap[template.deviceSimulation.browser]}
+                          <Text>{template.deviceSimulation.browser}</Text>
+                        </Space>
+                      </Space>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </TabPane>
+            <TabPane tab="自定义配置" key="2">
+              <Form
+                form={createForm}
+                layout="vertical"
+                onFinish={handleCreateSubmit}
+                style={{ marginTop: 16 }}
+              >
+                <Tabs defaultActiveKey="basic">
+                  <TabPane tab="基础信息" key="basic">
+                    <Form.Item
+                      name="name"
+                      label="配置名称"
+                      rules={[{ required: true, message: '请输入配置名称' }]}
+                    >
+                      <Input placeholder="例如：Windows Chrome 桌面配置" />
+                    </Form.Item>
+                    
+                    <Form.Item
+                      name="enabled"
+                      label="启用状态"
+                      valuePropName="checked"
+                      initialValue={true}
+                    >
+                      <Switch checkedChildren="启用" unCheckedChildren="禁用" />
+                    </Form.Item>
+                  </TabPane>
+                  
+                  <TabPane tab="设备模拟" key="device">
+                    <Row gutter={16}>
+                      <Col span={12}>
+                        <Form.Item
+                          name={['deviceSimulation', 'deviceType']}
+                          label="设备类型"
+                          rules={[{ required: true }]}
+                          initialValue="desktop"
+                        >
+                          <Select>
+                            <Option value="desktop">桌面设备</Option>
+                            <Option value="mobile">移动设备</Option>
+                            <Option value="tablet">平板设备</Option>
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item
+                          name={['deviceSimulation', 'os']}
+                          label="操作系统"
+                          rules={[{ required: true }]}
+                          initialValue="windows"
+                        >
+                          <Select>
+                            <Option value="windows">Windows</Option>
+                            <Option value="macos">macOS</Option>
+                            <Option value="linux">Linux</Option>
+                            <Option value="android">Android</Option>
+                            <Option value="ios">iOS</Option>
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    
+                    <Row gutter={16}>
+                      <Col span={12}>
+                        <Form.Item
+                          name={['deviceSimulation', 'osVersion']}
+                          label="系统版本"
+                          rules={[{ required: true }]}
+                          initialValue="10"
+                        >
+                          <Input placeholder="例如：10、14.2、13" />
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item
+                          name={['deviceSimulation', 'browser']}
+                          label="浏览器"
+                          rules={[{ required: true }]}
+                          initialValue="chrome"
+                        >
+                          <Select>
+                            <Option value="chrome">Chrome</Option>
+                            <Option value="firefox">Firefox</Option>
+                            <Option value="safari">Safari</Option>
+                            <Option value="edge">Edge</Option>
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    
+                    <Row gutter={16}>
+                      <Col span={12}>
+                        <Form.Item
+                          name={['deviceSimulation', 'browserVersion']}
+                          label="浏览器版本"
+                          rules={[{ required: true }]}
+                          initialValue="120.0.0.0"
+                        >
+                          <Input placeholder="例如：120.0.0.0" />
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item
+                          name={['deviceSimulation', 'pixelRatio']}
+                          label="像素密度"
+                          rules={[{ required: true }]}
+                          initialValue={1}
+                        >
+                          <InputNumber min={1} max={4} step={0.5} style={{ width: '100%' }} />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    
+                    <Row gutter={16}>
+                      <Col span={12}>
+                        <Form.Item
+                          name={['deviceSimulation', 'viewportWidth']}
+                          label="视口宽度"
+                          rules={[{ required: true }]}
+                          initialValue={1920}
+                        >
+                          <InputNumber min={320} max={3840} style={{ width: '100%' }} />
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item
+                          name={['deviceSimulation', 'viewportHeight']}
+                          label="视口高度"
+                          rules={[{ required: true }]}
+                          initialValue={1080}
+                        >
+                          <InputNumber min={480} max={2160} style={{ width: '100%' }} />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    
+                    <Form.Item
+                      name={['deviceSimulation', 'touchSupport']}
+                      label="触摸支持"
+                      valuePropName="checked"
+                      initialValue={false}
+                    >
+                      <Switch />
+                    </Form.Item>
+                  </TabPane>
+                  
+                  <TabPane tab="浏览器指纹" key="fingerprint">
+                    <Form.Item
+                      name={['browserFingerprint', 'userAgent']}
+                      label="User Agent"
+                      rules={[{ required: true }]}
+                      initialValue="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                    >
+                      <Input.TextArea rows={3} placeholder="请输入完整的User Agent字符串" />
+                    </Form.Item>
+                    
+                    <Row gutter={16}>
+                      <Col span={12}>
+                        <Form.Item
+                          name={['browserFingerprint', 'screenWidth']}
+                          label="屏幕宽度"
+                          rules={[{ required: true }]}
+                          initialValue={1920}
+                        >
+                          <InputNumber min={320} max={7680} style={{ width: '100%' }} />
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item
+                          name={['browserFingerprint', 'screenHeight']}
+                          label="屏幕高度"
+                          rules={[{ required: true }]}
+                          initialValue={1080}
+                        >
+                          <InputNumber min={480} max={4320} style={{ width: '100%' }} />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    
+                    <Row gutter={16}>
+                      <Col span={12}>
+                        <Form.Item
+                          name={['browserFingerprint', 'timezone']}
+                          label="时区"
+                          rules={[{ required: true }]}
+                          initialValue="Asia/Shanghai"
+                        >
+                          <Input placeholder="例如：Asia/Shanghai" />
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item
+                          name={['browserFingerprint', 'language']}
+                          label="语言"
+                          rules={[{ required: true }]}
+                          initialValue="zh-CN"
+                        >
+                          <Input placeholder="例如：zh-CN、en-US" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    
+                    <Form.Item
+                      name={['browserFingerprint', 'fonts']}
+                      label="字体列表"
+                      initialValue={['Arial', 'Microsoft YaHei', 'SimSun']}
+                    >
+                      <Select mode="tags" placeholder="添加字体名称" />
+                    </Form.Item>
+                  </TabPane>
+                  
+                  <TabPane tab="行为模拟" key="behavior">
+                    <Collapse defaultActiveKey={['mouse', 'keyboard']}>
+                      <Panel header="鼠标移动模拟" key="mouse">
+                        <Form.Item
+                          name={['humanBehavior', 'mouseMovement', 'enabled']}
+                          label="启用鼠标模拟"
+                          valuePropName="checked"
+                          initialValue={true}
+                        >
+                          <Switch />
+                        </Form.Item>

@@ -1,0 +1,3707 @@
+[
+  {
+    "id": "script_001",
+    "name": "早安问候 1",
+    "description": "简单的早安问候对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "morning",
+    "estimated_duration": 5,
+    "difficulty": "easy",
+    "tags": [
+      "问候",
+      "日常",
+      "简单"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨！最近好吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨！近来好吗？",
+          "嗨！这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "周末有什么计划？",
+        "delay_seconds": 3,
+        "variations": [
+          "周末有什么计划？",
+          "周末有什么计划？",
+          "周末有什么计划？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 4,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？",
+          "这段时间看了什么好电影？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "再见，祝你愉快",
+        "delay_seconds": 5,
+        "variations": [
+          "再见，祝你愉快",
+          "再见，祝你愉快",
+          "再见，祝你愉快"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 27,
+    "success_rate": 71,
+    "average_rating": 4.505241851641179,
+    "total_ratings": 8
+  },
+  {
+    "id": "script_002",
+    "name": "周末计划讨论 1",
+    "description": "讨论周末计划的对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "afternoon",
+    "estimated_duration": 8,
+    "difficulty": "easy",
+    "tags": [
+      "周末",
+      "计划",
+      "休闲"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 5,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "周末有什么计划？",
+        "delay_seconds": 5,
+        "variations": [
+          "周末有什么计划？",
+          "周末有什么计划？",
+          "周末有什么计划？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "今天天气不错",
+        "delay_seconds": 4,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "很高兴和你聊天",
+        "delay_seconds": 5,
+        "variations": [
+          "很高兴和你聊天",
+          "很高兴和你聊天",
+          "很高兴和你聊天"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 71,
+    "success_rate": 88,
+    "average_rating": 3.583577484480341,
+    "total_ratings": 16
+  },
+  {
+    "id": "script_003",
+    "name": "工作项目讨论 1",
+    "description": "同事之间讨论工作项目的对话",
+    "category": "business",
+    "relationship": "colleagues",
+    "time_of_day": "any",
+    "estimated_duration": 10,
+    "difficulty": "medium",
+    "tags": [
+      "工作",
+      "项目",
+      "讨论"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "关于那个项目，你有什么想法？",
+        "delay_seconds": 4,
+        "variations": [
+          "关于那个项目，你有什么想法？",
+          "关于那个项目，你有什么想法？",
+          "关于那个项目，你有什么想法？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "这个任务什么时候能完成？",
+        "delay_seconds": 4,
+        "variations": [
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "会议安排在明天可以吗？",
+        "delay_seconds": 4,
+        "variations": [
+          "会议安排在明天可以吗？",
+          "会议安排在明天可以吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "保持联系！",
+        "delay_seconds": 2,
+        "variations": [
+          "保持联系！",
+          "保持联系！"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 82,
+    "success_rate": 95,
+    "average_rating": 3.5829099460531735,
+    "total_ratings": 0
+  },
+  {
+    "id": "script_004",
+    "name": "兴趣爱好分享 1",
+    "description": "分享兴趣爱好的对话",
+    "category": "hobby",
+    "relationship": "acquaintances",
+    "time_of_day": "evening",
+    "estimated_duration": 12,
+    "difficulty": "easy",
+    "tags": [
+      "兴趣",
+      "爱好",
+      "分享"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好！最近怎么样？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨！近来如何？",
+          "你好啊！这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 4,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 2,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "很高兴和你聊天",
+        "delay_seconds": 3,
+        "variations": [
+          "很高兴和你聊天",
+          "很高兴和你聊天",
+          "很高兴和你聊天"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 30,
+    "success_rate": 77,
+    "average_rating": 3.6338973227579077,
+    "total_ratings": 43
+  },
+  {
+    "id": "script_005",
+    "name": "健身话题讨论 1",
+    "description": "讨论健身和健康的对话",
+    "category": "hobby",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 10,
+    "difficulty": "medium",
+    "tags": [
+      "健身",
+      "健康",
+      "运动"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好！最近怎么样？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨！近来如何？",
+          "你好啊！这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 2,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "好的，下次再聊",
+        "delay_seconds": 5,
+        "variations": [
+          "好的，下次再聊",
+          "好的，下次再聊",
+          "好的，下次再聊"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 87,
+    "success_rate": 81,
+    "average_rating": 4.719969924841972,
+    "total_ratings": 35
+  },
+  {
+    "id": "script_006",
+    "name": "美食推荐 1",
+    "description": "推荐美食和餐厅的对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 9,
+    "difficulty": "easy",
+    "tags": [
+      "美食",
+      "餐厅",
+      "推荐"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好！最近怎么样？",
+        "delay_seconds": 2,
+        "variations": [
+          "嗨！近来如何？",
+          "你好啊！这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？",
+          "这段时间工作忙吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？",
+          "这段时间工作忙吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "今天天气不错",
+        "delay_seconds": 3,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 2,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？",
+          "这段时间看了什么好电影？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "周末有什么计划？",
+        "delay_seconds": 4,
+        "variations": [
+          "周末有什么计划？",
+          "周末有什么计划？",
+          "周末有什么计划？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "再见，祝你愉快",
+        "delay_seconds": 2,
+        "variations": [
+          "再见，祝你愉快",
+          "再见，祝你愉快"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 2,
+    "success_rate": 70,
+    "average_rating": 3.563037108547305,
+    "total_ratings": 27
+  },
+  {
+    "id": "script_007",
+    "name": "旅行计划 1",
+    "description": "讨论旅行计划的对话",
+    "category": "hobby",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 12,
+    "difficulty": "medium",
+    "tags": [
+      "旅行",
+      "计划",
+      "假期"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近在玩什么游戏？",
+        "delay_seconds": 2,
+        "variations": [
+          "近来在玩什么游戏？",
+          "这些天在玩什么游戏？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 4,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 5,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 3,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "再见，祝你愉快",
+        "delay_seconds": 3,
+        "variations": [
+          "再见，祝你愉快",
+          "再见，祝你愉快",
+          "再见，祝你愉快"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 35,
+    "success_rate": 95,
+    "average_rating": 4.361526265924448,
+    "total_ratings": 14
+  },
+  {
+    "id": "script_008",
+    "name": "电影讨论 1",
+    "description": "讨论电影和影评的对话",
+    "category": "hobby",
+    "relationship": "acquaintances",
+    "time_of_day": "evening",
+    "estimated_duration": 11,
+    "difficulty": "easy",
+    "tags": [
+      "电影",
+      "娱乐",
+      "讨论"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 5,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？",
+          "嗨，这段时间怎样？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近在玩什么游戏？",
+        "delay_seconds": 4,
+        "variations": [
+          "近来在玩什么游戏？",
+          "这些天在玩什么游戏？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "好的，下次再聊",
+        "delay_seconds": 4,
+        "variations": [
+          "好的，下次再聊",
+          "好的，下次再聊",
+          "好的，下次再聊"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 97,
+    "success_rate": 86,
+    "average_rating": 4.443698019240327,
+    "total_ratings": 28
+  },
+  {
+    "id": "script_009",
+    "name": "技术问题讨论 1",
+    "description": "讨论技术问题和解决方案的对话",
+    "category": "business",
+    "relationship": "colleagues",
+    "time_of_day": "any",
+    "estimated_duration": 15,
+    "difficulty": "hard",
+    "tags": [
+      "技术",
+      "问题",
+      "解决方案"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好啊！最近如何？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨啊！近来如何？",
+          "你好啊啊！这些天如何？",
+          "哈喽啊！这段时间如何？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "这个任务什么时候能完成？",
+        "delay_seconds": 3,
+        "variations": [
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "我们需要讨论一下进度",
+        "delay_seconds": 3,
+        "variations": [
+          "我们需要讨论一下进度",
+          "我们需要讨论一下进度",
+          "我们需要讨论一下进度"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "会议安排在明天可以吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "会议安排在明天可以吗？",
+          "会议安排在明天可以吗？",
+          "会议安排在明天可以吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "我们需要讨论一下进度",
+        "delay_seconds": 3,
+        "variations": [
+          "我们需要讨论一下进度",
+          "我们需要讨论一下进度",
+          "我们需要讨论一下进度"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "我们需要讨论一下进度",
+        "delay_seconds": 3,
+        "variations": [
+          "我们需要讨论一下进度",
+          "我们需要讨论一下进度"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "好的，下次再聊",
+        "delay_seconds": 3,
+        "variations": [
+          "好的，下次再聊",
+          "好的，下次再聊"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 19,
+    "success_rate": 94,
+    "average_rating": 3.502425055220023,
+    "total_ratings": 30
+  },
+  {
+    "id": "script_010",
+    "name": "天气话题 1",
+    "description": "讨论天气和季节变化的对话",
+    "category": "casual",
+    "relationship": "acquaintances",
+    "time_of_day": "any",
+    "estimated_duration": 6,
+    "difficulty": "easy",
+    "tags": [
+      "天气",
+      "季节",
+      "日常"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好啊！最近如何？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨啊！近来如何？",
+          "你好啊啊！这些天如何？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "今天天气不错",
+        "delay_seconds": 4,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "周末有什么计划？",
+        "delay_seconds": 3,
+        "variations": [
+          "周末有什么计划？",
+          "周末有什么计划？",
+          "周末有什么计划？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "保持联系！",
+        "delay_seconds": 5,
+        "variations": [
+          "保持联系！",
+          "保持联系！",
+          "保持联系！"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 68,
+    "success_rate": 89,
+    "average_rating": 4.612086724893745,
+    "total_ratings": 41
+  },
+  {
+    "id": "script_011",
+    "name": "早安问候 2",
+    "description": "简单的早安问候对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "morning",
+    "estimated_duration": 5,
+    "difficulty": "easy",
+    "tags": [
+      "问候",
+      "日常",
+      "简单"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨！最近好吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "嗨！近来好吗？",
+          "嗨！这些天好吗？",
+          "嗨！这段时间好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 4,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "今天天气不错",
+        "delay_seconds": 3,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 5,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "今天天气不错",
+        "delay_seconds": 3,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "今天天气不错",
+        "delay_seconds": 2,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "保持联系！",
+        "delay_seconds": 3,
+        "variations": [
+          "保持联系！",
+          "保持联系！",
+          "保持联系！"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 22,
+    "success_rate": 75,
+    "average_rating": 4.083600484317551,
+    "total_ratings": 16
+  },
+  {
+    "id": "script_012",
+    "name": "周末计划讨论 2",
+    "description": "讨论周末计划的对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "afternoon",
+    "estimated_duration": 8,
+    "difficulty": "easy",
+    "tags": [
+      "周末",
+      "计划",
+      "休闲"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好！最近怎么样？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨！近来如何？",
+          "你好啊！这些天好吗？",
+          "哈喽！这段时间怎样？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 5,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "今天天气不错",
+        "delay_seconds": 4,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "再见，祝你愉快",
+        "delay_seconds": 3,
+        "variations": [
+          "再见，祝你愉快",
+          "再见，祝你愉快",
+          "再见，祝你愉快"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 19,
+    "success_rate": 97,
+    "average_rating": 4.132277085111796,
+    "total_ratings": 32
+  },
+  {
+    "id": "script_013",
+    "name": "工作项目讨论 2",
+    "description": "同事之间讨论工作项目的对话",
+    "category": "business",
+    "relationship": "colleagues",
+    "time_of_day": "any",
+    "estimated_duration": 10,
+    "difficulty": "medium",
+    "tags": [
+      "工作",
+      "项目",
+      "讨论"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好！最近怎么样？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨！近来如何？",
+          "你好啊！这些天好吗？",
+          "哈喽！这段时间怎样？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "会议安排在明天可以吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "会议安排在明天可以吗？",
+          "会议安排在明天可以吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "会议安排在明天可以吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "会议安排在明天可以吗？",
+          "会议安排在明天可以吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "我们需要讨论一下进度",
+        "delay_seconds": 2,
+        "variations": [
+          "我们需要讨论一下进度",
+          "我们需要讨论一下进度",
+          "我们需要讨论一下进度"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "好的，下次再聊",
+        "delay_seconds": 5,
+        "variations": [
+          "好的，下次再聊",
+          "好的，下次再聊"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 44,
+    "success_rate": 98,
+    "average_rating": 4.455886925074278,
+    "total_ratings": 35
+  },
+  {
+    "id": "script_014",
+    "name": "兴趣爱好分享 2",
+    "description": "分享兴趣爱好的对话",
+    "category": "hobby",
+    "relationship": "acquaintances",
+    "time_of_day": "evening",
+    "estimated_duration": 12,
+    "difficulty": "easy",
+    "tags": [
+      "兴趣",
+      "爱好",
+      "分享"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 4,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 4,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "保持联系！",
+        "delay_seconds": 2,
+        "variations": [
+          "保持联系！",
+          "保持联系！",
+          "保持联系！"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 94,
+    "success_rate": 75,
+    "average_rating": 3.782715905101883,
+    "total_ratings": 6
+  },
+  {
+    "id": "script_015",
+    "name": "健身话题讨论 2",
+    "description": "讨论健身和健康的对话",
+    "category": "hobby",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 10,
+    "difficulty": "medium",
+    "tags": [
+      "健身",
+      "健康",
+      "运动"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好啊！最近如何？",
+        "delay_seconds": 2,
+        "variations": [
+          "嗨啊！近来如何？",
+          "你好啊啊！这些天如何？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 3,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 5,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 4,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "好的，下次再聊",
+        "delay_seconds": 5,
+        "variations": [
+          "好的，下次再聊",
+          "好的，下次再聊",
+          "好的，下次再聊"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 71,
+    "success_rate": 89,
+    "average_rating": 4.435766669844982,
+    "total_ratings": 9
+  },
+  {
+    "id": "script_016",
+    "name": "美食推荐 2",
+    "description": "推荐美食和餐厅的对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 9,
+    "difficulty": "easy",
+    "tags": [
+      "美食",
+      "餐厅",
+      "推荐"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好啊！最近如何？",
+        "delay_seconds": 5,
+        "variations": [
+          "嗨啊！近来如何？",
+          "你好啊啊！这些天如何？",
+          "哈喽啊！这段时间如何？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 5,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 2,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？",
+          "这段时间看了什么好电影？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "再见，祝你愉快",
+        "delay_seconds": 2,
+        "variations": [
+          "再见，祝你愉快",
+          "再见，祝你愉快",
+          "再见，祝你愉快"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 44,
+    "success_rate": 79,
+    "average_rating": 3.627494908737567,
+    "total_ratings": 33
+  },
+  {
+    "id": "script_017",
+    "name": "旅行计划 2",
+    "description": "讨论旅行计划的对话",
+    "category": "hobby",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 12,
+    "difficulty": "medium",
+    "tags": [
+      "旅行",
+      "计划",
+      "假期"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好！最近怎么样？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨！近来如何？",
+          "你好啊！这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 5,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 5,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "保持联系！",
+        "delay_seconds": 5,
+        "variations": [
+          "保持联系！",
+          "保持联系！"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 62,
+    "success_rate": 74,
+    "average_rating": 3.893726963937597,
+    "total_ratings": 47
+  },
+  {
+    "id": "script_018",
+    "name": "电影讨论 2",
+    "description": "讨论电影和影评的对话",
+    "category": "hobby",
+    "relationship": "acquaintances",
+    "time_of_day": "evening",
+    "estimated_duration": 11,
+    "difficulty": "easy",
+    "tags": [
+      "电影",
+      "娱乐",
+      "讨论"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨！最近好吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "嗨！近来好吗？",
+          "嗨！这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 5,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "再见，祝你愉快",
+        "delay_seconds": 3,
+        "variations": [
+          "再见，祝你愉快",
+          "再见，祝你愉快",
+          "再见，祝你愉快"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 7,
+    "success_rate": 89,
+    "average_rating": 3.6378901542818993,
+    "total_ratings": 40
+  },
+  {
+    "id": "script_019",
+    "name": "技术问题讨论 2",
+    "description": "讨论技术问题和解决方案的对话",
+    "category": "business",
+    "relationship": "colleagues",
+    "time_of_day": "any",
+    "estimated_duration": 15,
+    "difficulty": "hard",
+    "tags": [
+      "技术",
+      "问题",
+      "解决方案"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨！最近好吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "嗨！近来好吗？",
+          "嗨！这些天好吗？",
+          "嗨！这段时间好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "这个任务什么时候能完成？",
+        "delay_seconds": 2,
+        "variations": [
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "这个任务什么时候能完成？",
+        "delay_seconds": 2,
+        "variations": [
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "我们需要讨论一下进度",
+        "delay_seconds": 4,
+        "variations": [
+          "我们需要讨论一下进度",
+          "我们需要讨论一下进度"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "会议安排在明天可以吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "会议安排在明天可以吗？",
+          "会议安排在明天可以吗？",
+          "会议安排在明天可以吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "很高兴和你聊天",
+        "delay_seconds": 3,
+        "variations": [
+          "很高兴和你聊天",
+          "很高兴和你聊天",
+          "很高兴和你聊天"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 49,
+    "success_rate": 91,
+    "average_rating": 3.614979835395317,
+    "total_ratings": 15
+  },
+  {
+    "id": "script_020",
+    "name": "天气话题 2",
+    "description": "讨论天气和季节变化的对话",
+    "category": "casual",
+    "relationship": "acquaintances",
+    "time_of_day": "any",
+    "estimated_duration": 6,
+    "difficulty": "easy",
+    "tags": [
+      "天气",
+      "季节",
+      "日常"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？",
+          "这段时间工作忙吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "今天天气不错",
+        "delay_seconds": 4,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "今天天气不错",
+        "delay_seconds": 5,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 2,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "好的，下次再聊",
+        "delay_seconds": 2,
+        "variations": [
+          "好的，下次再聊",
+          "好的，下次再聊",
+          "好的，下次再聊"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 7,
+    "success_rate": 79,
+    "average_rating": 4.6100799418417235,
+    "total_ratings": 1
+  },
+  {
+    "id": "script_021",
+    "name": "早安问候 3",
+    "description": "简单的早安问候对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "morning",
+    "estimated_duration": 5,
+    "difficulty": "easy",
+    "tags": [
+      "问候",
+      "日常",
+      "简单"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨！最近好吗？",
+        "delay_seconds": 5,
+        "variations": [
+          "嗨！近来好吗？",
+          "嗨！这些天好吗？",
+          "嗨！这段时间好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 5,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？",
+          "这段时间看了什么好电影？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "今天天气不错",
+        "delay_seconds": 3,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？",
+          "这段时间看了什么好电影？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "很高兴和你聊天",
+        "delay_seconds": 2,
+        "variations": [
+          "很高兴和你聊天",
+          "很高兴和你聊天",
+          "很高兴和你聊天"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 86,
+    "success_rate": 95,
+    "average_rating": 4.4218758791621084,
+    "total_ratings": 33
+  },
+  {
+    "id": "script_022",
+    "name": "周末计划讨论 3",
+    "description": "讨论周末计划的对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "afternoon",
+    "estimated_duration": 8,
+    "difficulty": "easy",
+    "tags": [
+      "周末",
+      "计划",
+      "休闲"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好啊！最近如何？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨啊！近来如何？",
+          "你好啊啊！这些天如何？",
+          "哈喽啊！这段时间如何？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 4,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "周末有什么计划？",
+        "delay_seconds": 2,
+        "variations": [
+          "周末有什么计划？",
+          "周末有什么计划？",
+          "周末有什么计划？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "今天天气不错",
+        "delay_seconds": 3,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 4,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "保持联系！",
+        "delay_seconds": 5,
+        "variations": [
+          "保持联系！",
+          "保持联系！"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 80,
+    "success_rate": 70,
+    "average_rating": 4.895207014701067,
+    "total_ratings": 22
+  },
+  {
+    "id": "script_023",
+    "name": "工作项目讨论 3",
+    "description": "同事之间讨论工作项目的对话",
+    "category": "business",
+    "relationship": "colleagues",
+    "time_of_day": "any",
+    "estimated_duration": 10,
+    "difficulty": "medium",
+    "tags": [
+      "工作",
+      "项目",
+      "讨论"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好啊！最近如何？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨啊！近来如何？",
+          "你好啊啊！这些天如何？",
+          "哈喽啊！这段时间如何？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "关于那个项目，你有什么想法？",
+        "delay_seconds": 3,
+        "variations": [
+          "关于那个项目，你有什么想法？",
+          "关于那个项目，你有什么想法？",
+          "关于那个项目，你有什么想法？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "这个任务什么时候能完成？",
+        "delay_seconds": 4,
+        "variations": [
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "好的，下次再聊",
+        "delay_seconds": 3,
+        "variations": [
+          "好的，下次再聊",
+          "好的，下次再聊"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 60,
+    "success_rate": 99,
+    "average_rating": 4.92500875849345,
+    "total_ratings": 11
+  },
+  {
+    "id": "script_024",
+    "name": "兴趣爱好分享 3",
+    "description": "分享兴趣爱好的对话",
+    "category": "hobby",
+    "relationship": "acquaintances",
+    "time_of_day": "evening",
+    "estimated_duration": 12,
+    "difficulty": "easy",
+    "tags": [
+      "兴趣",
+      "爱好",
+      "分享"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好！最近怎么样？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨！近来如何？",
+          "你好啊！这些天好吗？",
+          "哈喽！这段时间怎样？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近在玩什么游戏？",
+        "delay_seconds": 4,
+        "variations": [
+          "近来在玩什么游戏？",
+          "这些天在玩什么游戏？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 5,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "再见，祝你愉快",
+        "delay_seconds": 5,
+        "variations": [
+          "再见，祝你愉快",
+          "再见，祝你愉快",
+          "再见，祝你愉快"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 90,
+    "success_rate": 89,
+    "average_rating": 4.412400223070577,
+    "total_ratings": 37
+  },
+  {
+    "id": "script_025",
+    "name": "健身话题讨论 3",
+    "description": "讨论健身和健康的对话",
+    "category": "hobby",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 10,
+    "difficulty": "medium",
+    "tags": [
+      "健身",
+      "健康",
+      "运动"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 5,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 5,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 4,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "再见，祝你愉快",
+        "delay_seconds": 2,
+        "variations": [
+          "再见，祝你愉快",
+          "再见，祝你愉快"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 84,
+    "success_rate": 77,
+    "average_rating": 3.7798897944658445,
+    "total_ratings": 3
+  },
+  {
+    "id": "script_026",
+    "name": "美食推荐 3",
+    "description": "推荐美食和餐厅的对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 9,
+    "difficulty": "easy",
+    "tags": [
+      "美食",
+      "餐厅",
+      "推荐"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好啊！最近如何？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨啊！近来如何？",
+          "你好啊啊！这些天如何？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？",
+          "这段时间工作忙吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 2,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？",
+          "这段时间看了什么好电影？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 5,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？",
+          "这段时间工作忙吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "好的，下次再聊",
+        "delay_seconds": 5,
+        "variations": [
+          "好的，下次再聊",
+          "好的，下次再聊",
+          "好的，下次再聊"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 34,
+    "success_rate": 95,
+    "average_rating": 4.172550135467215,
+    "total_ratings": 42
+  },
+  {
+    "id": "script_027",
+    "name": "旅行计划 3",
+    "description": "讨论旅行计划的对话",
+    "category": "hobby",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 12,
+    "difficulty": "medium",
+    "tags": [
+      "旅行",
+      "计划",
+      "假期"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近在玩什么游戏？",
+        "delay_seconds": 2,
+        "variations": [
+          "近来在玩什么游戏？",
+          "这些天在玩什么游戏？",
+          "这段时间在玩什么游戏？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 3,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 2,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 4,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 5,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "很高兴和你聊天",
+        "delay_seconds": 2,
+        "variations": [
+          "很高兴和你聊天",
+          "很高兴和你聊天",
+          "很高兴和你聊天"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 59,
+    "success_rate": 73,
+    "average_rating": 4.648071692996242,
+    "total_ratings": 1
+  },
+  {
+    "id": "script_028",
+    "name": "电影讨论 3",
+    "description": "讨论电影和影评的对话",
+    "category": "hobby",
+    "relationship": "acquaintances",
+    "time_of_day": "evening",
+    "estimated_duration": 11,
+    "difficulty": "easy",
+    "tags": [
+      "电影",
+      "娱乐",
+      "讨论"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好啊！最近如何？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨啊！近来如何？",
+          "你好啊啊！这些天如何？",
+          "哈喽啊！这段时间如何？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 4,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 4,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "很高兴和你聊天",
+        "delay_seconds": 3,
+        "variations": [
+          "很高兴和你聊天",
+          "很高兴和你聊天"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 13,
+    "success_rate": 90,
+    "average_rating": 4.81655900901942,
+    "total_ratings": 9
+  },
+  {
+    "id": "script_029",
+    "name": "技术问题讨论 3",
+    "description": "讨论技术问题和解决方案的对话",
+    "category": "business",
+    "relationship": "colleagues",
+    "time_of_day": "any",
+    "estimated_duration": 15,
+    "difficulty": "hard",
+    "tags": [
+      "技术",
+      "问题",
+      "解决方案"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好啊！最近如何？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨啊！近来如何？",
+          "你好啊啊！这些天如何？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "我们需要讨论一下进度",
+        "delay_seconds": 3,
+        "variations": [
+          "我们需要讨论一下进度",
+          "我们需要讨论一下进度",
+          "我们需要讨论一下进度"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "关于那个项目，你有什么想法？",
+        "delay_seconds": 5,
+        "variations": [
+          "关于那个项目，你有什么想法？",
+          "关于那个项目，你有什么想法？",
+          "关于那个项目，你有什么想法？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "关于那个项目，你有什么想法？",
+        "delay_seconds": 2,
+        "variations": [
+          "关于那个项目，你有什么想法？",
+          "关于那个项目，你有什么想法？",
+          "关于那个项目，你有什么想法？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "保持联系！",
+        "delay_seconds": 2,
+        "variations": [
+          "保持联系！",
+          "保持联系！",
+          "保持联系！"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 32,
+    "success_rate": 76,
+    "average_rating": 4.728290567305434,
+    "total_ratings": 28
+  },
+  {
+    "id": "script_030",
+    "name": "天气话题 3",
+    "description": "讨论天气和季节变化的对话",
+    "category": "casual",
+    "relationship": "acquaintances",
+    "time_of_day": "any",
+    "estimated_duration": 6,
+    "difficulty": "easy",
+    "tags": [
+      "天气",
+      "季节",
+      "日常"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 2,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？",
+          "嗨，这段时间怎样？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？",
+          "这段时间工作忙吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "周末有什么计划？",
+        "delay_seconds": 5,
+        "variations": [
+          "周末有什么计划？",
+          "周末有什么计划？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "保持联系！",
+        "delay_seconds": 4,
+        "variations": [
+          "保持联系！",
+          "保持联系！"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 74,
+    "success_rate": 99,
+    "average_rating": 4.261657018663151,
+    "total_ratings": 44
+  },
+  {
+    "id": "script_031",
+    "name": "早安问候 4",
+    "description": "简单的早安问候对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "morning",
+    "estimated_duration": 5,
+    "difficulty": "easy",
+    "tags": [
+      "问候",
+      "日常",
+      "简单"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？",
+          "嗨，这段时间怎样？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "周末有什么计划？",
+        "delay_seconds": 5,
+        "variations": [
+          "周末有什么计划？",
+          "周末有什么计划？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 4,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "很高兴和你聊天",
+        "delay_seconds": 3,
+        "variations": [
+          "很高兴和你聊天",
+          "很高兴和你聊天",
+          "很高兴和你聊天"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 87,
+    "success_rate": 72,
+    "average_rating": 3.6633238078389225,
+    "total_ratings": 24
+  },
+  {
+    "id": "script_032",
+    "name": "周末计划讨论 4",
+    "description": "讨论周末计划的对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "afternoon",
+    "estimated_duration": 8,
+    "difficulty": "easy",
+    "tags": [
+      "周末",
+      "计划",
+      "休闲"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好！最近怎么样？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨！近来如何？",
+          "你好啊！这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 5,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？",
+          "这段时间工作忙吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "好的，下次再聊",
+        "delay_seconds": 4,
+        "variations": [
+          "好的，下次再聊",
+          "好的，下次再聊"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 71,
+    "success_rate": 84,
+    "average_rating": 4.682740451614199,
+    "total_ratings": 32
+  },
+  {
+    "id": "script_033",
+    "name": "工作项目讨论 4",
+    "description": "同事之间讨论工作项目的对话",
+    "category": "business",
+    "relationship": "colleagues",
+    "time_of_day": "any",
+    "estimated_duration": 10,
+    "difficulty": "medium",
+    "tags": [
+      "工作",
+      "项目",
+      "讨论"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好！最近怎么样？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨！近来如何？",
+          "你好啊！这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "这个任务什么时候能完成？",
+        "delay_seconds": 2,
+        "variations": [
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "会议安排在明天可以吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "会议安排在明天可以吗？",
+          "会议安排在明天可以吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "这个任务什么时候能完成？",
+        "delay_seconds": 4,
+        "variations": [
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "关于那个项目，你有什么想法？",
+        "delay_seconds": 4,
+        "variations": [
+          "关于那个项目，你有什么想法？",
+          "关于那个项目，你有什么想法？",
+          "关于那个项目，你有什么想法？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "再见，祝你愉快",
+        "delay_seconds": 3,
+        "variations": [
+          "再见，祝你愉快",
+          "再见，祝你愉快",
+          "再见，祝你愉快"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 88,
+    "success_rate": 91,
+    "average_rating": 4.707190859340285,
+    "total_ratings": 48
+  },
+  {
+    "id": "script_034",
+    "name": "兴趣爱好分享 4",
+    "description": "分享兴趣爱好的对话",
+    "category": "hobby",
+    "relationship": "acquaintances",
+    "time_of_day": "evening",
+    "estimated_duration": 12,
+    "difficulty": "easy",
+    "tags": [
+      "兴趣",
+      "爱好",
+      "分享"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好！最近怎么样？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨！近来如何？",
+          "你好啊！这些天好吗？",
+          "哈喽！这段时间怎样？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近在玩什么游戏？",
+        "delay_seconds": 4,
+        "variations": [
+          "近来在玩什么游戏？",
+          "这些天在玩什么游戏？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 4,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近在玩什么游戏？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来在玩什么游戏？",
+          "这些天在玩什么游戏？",
+          "这段时间在玩什么游戏？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近在玩什么游戏？",
+        "delay_seconds": 2,
+        "variations": [
+          "近来在玩什么游戏？",
+          "这些天在玩什么游戏？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "很高兴和你聊天",
+        "delay_seconds": 3,
+        "variations": [
+          "很高兴和你聊天",
+          "很高兴和你聊天",
+          "很高兴和你聊天"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 49,
+    "success_rate": 72,
+    "average_rating": 3.900563808408859,
+    "total_ratings": 44
+  },
+  {
+    "id": "script_035",
+    "name": "健身话题讨论 4",
+    "description": "讨论健身和健康的对话",
+    "category": "hobby",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 10,
+    "difficulty": "medium",
+    "tags": [
+      "健身",
+      "健康",
+      "运动"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好！最近怎么样？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨！近来如何？",
+          "你好啊！这些天好吗？",
+          "哈喽！这段时间怎样？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 4,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 2,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 2,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近在玩什么游戏？",
+        "delay_seconds": 5,
+        "variations": [
+          "近来在玩什么游戏？",
+          "这些天在玩什么游戏？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 4,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "好的，下次再聊",
+        "delay_seconds": 5,
+        "variations": [
+          "好的，下次再聊",
+          "好的，下次再聊",
+          "好的，下次再聊"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 19,
+    "success_rate": 82,
+    "average_rating": 4.515304618812555,
+    "total_ratings": 28
+  },
+  {
+    "id": "script_036",
+    "name": "美食推荐 4",
+    "description": "推荐美食和餐厅的对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 9,
+    "difficulty": "easy",
+    "tags": [
+      "美食",
+      "餐厅",
+      "推荐"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好啊！最近如何？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨啊！近来如何？",
+          "你好啊啊！这些天如何？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 4,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？",
+          "这段时间工作忙吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 4,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？",
+          "这段时间看了什么好电影？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "今天天气不错",
+        "delay_seconds": 4,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "保持联系！",
+        "delay_seconds": 3,
+        "variations": [
+          "保持联系！",
+          "保持联系！"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 17,
+    "success_rate": 83,
+    "average_rating": 3.5061251582971873,
+    "total_ratings": 5
+  },
+  {
+    "id": "script_037",
+    "name": "旅行计划 4",
+    "description": "讨论旅行计划的对话",
+    "category": "hobby",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 12,
+    "difficulty": "medium",
+    "tags": [
+      "旅行",
+      "计划",
+      "假期"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 2,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 3,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近在玩什么游戏？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来在玩什么游戏？",
+          "这些天在玩什么游戏？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 3,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "保持联系！",
+        "delay_seconds": 5,
+        "variations": [
+          "保持联系！",
+          "保持联系！",
+          "保持联系！"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 45,
+    "success_rate": 78,
+    "average_rating": 4.572968995101487,
+    "total_ratings": 47
+  },
+  {
+    "id": "script_038",
+    "name": "电影讨论 4",
+    "description": "讨论电影和影评的对话",
+    "category": "hobby",
+    "relationship": "acquaintances",
+    "time_of_day": "evening",
+    "estimated_duration": 11,
+    "difficulty": "easy",
+    "tags": [
+      "电影",
+      "娱乐",
+      "讨论"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 5,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？",
+          "嗨，这段时间怎样？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 3,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 4,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "保持联系！",
+        "delay_seconds": 2,
+        "variations": [
+          "保持联系！",
+          "保持联系！"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 36,
+    "success_rate": 72,
+    "average_rating": 4.060965967171634,
+    "total_ratings": 19
+  },
+  {
+    "id": "script_039",
+    "name": "技术问题讨论 4",
+    "description": "讨论技术问题和解决方案的对话",
+    "category": "business",
+    "relationship": "colleagues",
+    "time_of_day": "any",
+    "estimated_duration": 15,
+    "difficulty": "hard",
+    "tags": [
+      "技术",
+      "问题",
+      "解决方案"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好！最近怎么样？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨！近来如何？",
+          "你好啊！这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "这个任务什么时候能完成？",
+        "delay_seconds": 5,
+        "variations": [
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "我们需要讨论一下进度",
+        "delay_seconds": 2,
+        "variations": [
+          "我们需要讨论一下进度",
+          "我们需要讨论一下进度"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "这个任务什么时候能完成？",
+        "delay_seconds": 4,
+        "variations": [
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "很高兴和你聊天",
+        "delay_seconds": 2,
+        "variations": [
+          "很高兴和你聊天",
+          "很高兴和你聊天"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 1,
+    "success_rate": 82,
+    "average_rating": 3.6208418253517562,
+    "total_ratings": 21
+  },
+  {
+    "id": "script_040",
+    "name": "天气话题 4",
+    "description": "讨论天气和季节变化的对话",
+    "category": "casual",
+    "relationship": "acquaintances",
+    "time_of_day": "any",
+    "estimated_duration": 6,
+    "difficulty": "easy",
+    "tags": [
+      "天气",
+      "季节",
+      "日常"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 5,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "周末有什么计划？",
+        "delay_seconds": 5,
+        "variations": [
+          "周末有什么计划？",
+          "周末有什么计划？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "今天天气不错",
+        "delay_seconds": 4,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "周末有什么计划？",
+        "delay_seconds": 4,
+        "variations": [
+          "周末有什么计划？",
+          "周末有什么计划？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "周末有什么计划？",
+        "delay_seconds": 4,
+        "variations": [
+          "周末有什么计划？",
+          "周末有什么计划？",
+          "周末有什么计划？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 5,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "保持联系！",
+        "delay_seconds": 4,
+        "variations": [
+          "保持联系！",
+          "保持联系！"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 27,
+    "success_rate": 75,
+    "average_rating": 4.974141817588708,
+    "total_ratings": 2
+  },
+  {
+    "id": "script_041",
+    "name": "早安问候 5",
+    "description": "简单的早安问候对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "morning",
+    "estimated_duration": 5,
+    "difficulty": "easy",
+    "tags": [
+      "问候",
+      "日常",
+      "简单"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨！最近好吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "嗨！近来好吗？",
+          "嗨！这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 5,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？",
+          "这段时间工作忙吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "今天天气不错",
+        "delay_seconds": 3,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 5,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "很高兴和你聊天",
+        "delay_seconds": 2,
+        "variations": [
+          "很高兴和你聊天",
+          "很高兴和你聊天"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 8,
+    "success_rate": 79,
+    "average_rating": 4.463348447305032,
+    "total_ratings": 47
+  },
+  {
+    "id": "script_042",
+    "name": "周末计划讨论 5",
+    "description": "讨论周末计划的对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "afternoon",
+    "estimated_duration": 8,
+    "difficulty": "easy",
+    "tags": [
+      "周末",
+      "计划",
+      "休闲"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好啊！最近如何？",
+        "delay_seconds": 5,
+        "variations": [
+          "嗨啊！近来如何？",
+          "你好啊啊！这些天如何？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 4,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？",
+          "这段时间工作忙吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "今天天气不错",
+        "delay_seconds": 2,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？",
+          "这段时间工作忙吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "今天天气不错",
+        "delay_seconds": 5,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "好的，下次再聊",
+        "delay_seconds": 5,
+        "variations": [
+          "好的，下次再聊",
+          "好的，下次再聊",
+          "好的，下次再聊"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 22,
+    "success_rate": 97,
+    "average_rating": 3.6131437602769862,
+    "total_ratings": 10
+  },
+  {
+    "id": "script_043",
+    "name": "工作项目讨论 5",
+    "description": "同事之间讨论工作项目的对话",
+    "category": "business",
+    "relationship": "colleagues",
+    "time_of_day": "any",
+    "estimated_duration": 10,
+    "difficulty": "medium",
+    "tags": [
+      "工作",
+      "项目",
+      "讨论"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好！最近怎么样？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨！近来如何？",
+          "你好啊！这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "会议安排在明天可以吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "会议安排在明天可以吗？",
+          "会议安排在明天可以吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "会议安排在明天可以吗？",
+        "delay_seconds": 5,
+        "variations": [
+          "会议安排在明天可以吗？",
+          "会议安排在明天可以吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "这个任务什么时候能完成？",
+        "delay_seconds": 4,
+        "variations": [
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？",
+          "这个任务什么时候能完成？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "关于那个项目，你有什么想法？",
+        "delay_seconds": 4,
+        "variations": [
+          "关于那个项目，你有什么想法？",
+          "关于那个项目，你有什么想法？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "会议安排在明天可以吗？",
+        "delay_seconds": 4,
+        "variations": [
+          "会议安排在明天可以吗？",
+          "会议安排在明天可以吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "保持联系！",
+        "delay_seconds": 2,
+        "variations": [
+          "保持联系！",
+          "保持联系！",
+          "保持联系！"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 66,
+    "success_rate": 89,
+    "average_rating": 4.558806784665505,
+    "total_ratings": 43
+  },
+  {
+    "id": "script_044",
+    "name": "兴趣爱好分享 5",
+    "description": "分享兴趣爱好的对话",
+    "category": "hobby",
+    "relationship": "acquaintances",
+    "time_of_day": "evening",
+    "estimated_duration": 12,
+    "difficulty": "easy",
+    "tags": [
+      "兴趣",
+      "爱好",
+      "分享"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好啊！最近如何？",
+        "delay_seconds": 5,
+        "variations": [
+          "嗨啊！近来如何？",
+          "你好啊啊！这些天如何？",
+          "哈喽啊！这段时间如何？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近在玩什么游戏？",
+        "delay_seconds": 4,
+        "variations": [
+          "近来在玩什么游戏？",
+          "这些天在玩什么游戏？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "很高兴和你聊天",
+        "delay_seconds": 2,
+        "variations": [
+          "很高兴和你聊天",
+          "很高兴和你聊天"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 7,
+    "success_rate": 97,
+    "average_rating": 4.362898719825963,
+    "total_ratings": 39
+  },
+  {
+    "id": "script_045",
+    "name": "健身话题讨论 5",
+    "description": "讨论健身和健康的对话",
+    "category": "hobby",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 10,
+    "difficulty": "medium",
+    "tags": [
+      "健身",
+      "健康",
+      "运动"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好！最近怎么样？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨！近来如何？",
+          "你好啊！这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 2,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 2,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近在玩什么游戏？",
+        "delay_seconds": 5,
+        "variations": [
+          "近来在玩什么游戏？",
+          "这些天在玩什么游戏？",
+          "这段时间在玩什么游戏？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你喜欢什么类型的音乐？",
+        "delay_seconds": 5,
+        "variations": [
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？",
+          "你喜欢什么类型的音乐？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "好的，下次再聊",
+        "delay_seconds": 3,
+        "variations": [
+          "好的，下次再聊",
+          "好的，下次再聊",
+          "好的，下次再聊"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 11,
+    "success_rate": 73,
+    "average_rating": 4.598200032652206,
+    "total_ratings": 16
+  },
+  {
+    "id": "script_046",
+    "name": "美食推荐 5",
+    "description": "推荐美食和餐厅的对话",
+    "category": "casual",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 9,
+    "difficulty": "easy",
+    "tags": [
+      "美食",
+      "餐厅",
+      "推荐"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 5,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？",
+          "嗨，这段时间怎样？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "周末有什么计划？",
+        "delay_seconds": 3,
+        "variations": [
+          "周末有什么计划？",
+          "周末有什么计划？",
+          "周末有什么计划？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "今天天气不错",
+        "delay_seconds": 5,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 5,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？",
+          "这段时间工作忙吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近看了什么好电影？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来看了什么好电影？",
+          "这些天看了什么好电影？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "今天天气不错",
+        "delay_seconds": 3,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "再见，祝你愉快",
+        "delay_seconds": 4,
+        "variations": [
+          "再见，祝你愉快",
+          "再见，祝你愉快",
+          "再见，祝你愉快"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 89,
+    "success_rate": 90,
+    "average_rating": 3.6400877258174518,
+    "total_ratings": 35
+  },
+  {
+    "id": "script_047",
+    "name": "旅行计划 5",
+    "description": "讨论旅行计划的对话",
+    "category": "hobby",
+    "relationship": "friends",
+    "time_of_day": "any",
+    "estimated_duration": 12,
+    "difficulty": "medium",
+    "tags": [
+      "旅行",
+      "计划",
+      "假期"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "你好啊！最近如何？",
+        "delay_seconds": 3,
+        "variations": [
+          "嗨啊！近来如何？",
+          "你好啊啊！这些天如何？",
+          "哈喽啊！这段时间如何？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 2,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "最近在玩什么游戏？",
+        "delay_seconds": 2,
+        "variations": [
+          "近来在玩什么游戏？",
+          "这些天在玩什么游戏？",
+          "这段时间在玩什么游戏？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近在玩什么游戏？",
+        "delay_seconds": 2,
+        "variations": [
+          "近来在玩什么游戏？",
+          "这些天在玩什么游戏？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "有什么好书推荐吗？",
+        "delay_seconds": 4,
+        "variations": [
+          "有什么好书推荐吗？",
+          "有什么好书推荐吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "再见，祝你愉快",
+        "delay_seconds": 4,
+        "variations": [
+          "再见，祝你愉快",
+          "再见，祝你愉快",
+          "再见，祝你愉快"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 6,
+    "success_rate": 87,
+    "average_rating": 4.673707708873714,
+    "total_ratings": 25
+  },
+  {
+    "id": "script_048",
+    "name": "电影讨论 5",
+    "description": "讨论电影和影评的对话",
+    "category": "hobby",
+    "relationship": "acquaintances",
+    "time_of_day": "evening",
+    "estimated_duration": 11,
+    "difficulty": "easy",
+    "tags": [
+      "电影",
+      "娱乐",
+      "讨论"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨！最近好吗？",
+        "delay_seconds": 2,
+        "variations": [
+          "嗨！近来好吗？",
+          "嗨！这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近在玩什么游戏？",
+        "delay_seconds": 2,
+        "variations": [
+          "近来在玩什么游戏？",
+          "这些天在玩什么游戏？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "你平时有什么兴趣爱好？",
+        "delay_seconds": 3,
+        "variations": [
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？",
+          "你平时有什么兴趣爱好？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "好的，下次再聊",
+        "delay_seconds": 5,
+        "variations": [
+          "好的，下次再聊",
+          "好的，下次再聊"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 43,
+    "success_rate": 85,
+    "average_rating": 3.953743888221089,
+    "total_ratings": 15
+  },
+  {
+    "id": "script_049",
+    "name": "技术问题讨论 5",
+    "description": "讨论技术问题和解决方案的对话",
+    "category": "business",
+    "relationship": "colleagues",
+    "time_of_day": "any",
+    "estimated_duration": 15,
+    "difficulty": "hard",
+    "tags": [
+      "技术",
+      "问题",
+      "解决方案"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨！最近好吗？",
+        "delay_seconds": 4,
+        "variations": [
+          "嗨！近来好吗？",
+          "嗨！这些天好吗？",
+          "嗨！这段时间好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "会议安排在明天可以吗？",
+        "delay_seconds": 5,
+        "variations": [
+          "会议安排在明天可以吗？",
+          "会议安排在明天可以吗？",
+          "会议安排在明天可以吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "我们需要讨论一下进度",
+        "delay_seconds": 5,
+        "variations": [
+          "我们需要讨论一下进度",
+          "我们需要讨论一下进度"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "会议安排在明天可以吗？",
+        "delay_seconds": 4,
+        "variations": [
+          "会议安排在明天可以吗？",
+          "会议安排在明天可以吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "再见，祝你愉快",
+        "delay_seconds": 5,
+        "variations": [
+          "再见，祝你愉快",
+          "再见，祝你愉快",
+          "再见，祝你愉快"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 59,
+    "success_rate": 95,
+    "average_rating": 4.284750836926023,
+    "total_ratings": 35
+  },
+  {
+    "id": "script_050",
+    "name": "天气话题 5",
+    "description": "讨论天气和季节变化的对话",
+    "category": "casual",
+    "relationship": "acquaintances",
+    "time_of_day": "any",
+    "estimated_duration": 6,
+    "difficulty": "easy",
+    "tags": [
+      "天气",
+      "季节",
+      "日常"
+    ],
+    "flow": [
+      {
+        "role": "initiator",
+        "message": "嗨，最近怎么样？",
+        "delay_seconds": 2,
+        "variations": [
+          "嗨，近来如何？",
+          "嗨，这些天好吗？"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "最近工作忙吗？",
+        "delay_seconds": 3,
+        "variations": [
+          "近来工作忙吗？",
+          "这些天工作忙吗？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "今天天气不错",
+        "delay_seconds": 3,
+        "variations": [
+          "今天天气不错",
+          "今天天气不错"
+        ]
+      },
+      {
+        "role": "responder",
+        "message": "周末有什么计划？",
+        "delay_seconds": 3,
+        "variations": [
+          "周末有什么计划？",
+          "周末有什么计划？"
+        ]
+      },
+      {
+        "role": "initiator",
+        "message": "很高兴和你聊天",
+        "delay_seconds": 3,
+        "variations": [
+          "很高兴和你聊天",
+          "很高兴和你聊天",
+          "很高兴和你聊天"
+        ]
+      }
+    ],
+    "version": "1.0.0",
+    "is_active": true,
+    "usage_count": 85,
+    "success_rate": 87,
+    "average_rating": 4.06507763212847,
+    "total_ratings": 3
+  }
+]

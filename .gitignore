@@ -1,0 +1,317 @@
+# 依赖目录
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 环境变量文件
+.env
+.env.local
+.env.*.local
+!.env.example
+!.env.local.example
+
+# 日志文件
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# 运行时数据
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# 覆盖率目录
+coverage/
+*.lcov
+
+# 构建输出
+dist/
+build/
+.out/
+.next/
+
+# 缓存
+.cache/
+.parcel-cache/
+
+# 操作系统文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 临时文件
+tmp/
+temp/
+
+# 测试文件
+*.spec.js
+*.test.js
+
+# 安全扫描结果
+security-scan-results/
+vulnerability-reports/
+
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+
+# 上传文件
+uploads/
+media/
+
+# 密钥文件
+*.pem
+*.key
+*.crt
+*.csr
+
+# 配置文件（生产环境）
+config/production.json
+config/staging.json
+
+# Docker相关
+.dockerignore
+docker-compose.override.yml
+
+# 前端构建缓存
+.frontend-build/
+.backend-build/
+
+# Claude Code / local tool state
+.claude/
+.npm/
+.openclaw/
+state/
+memory/
+
+# Nested backup directory
+Facebook Auto Bot/
+
+# Large chat logs / temp files
+chat-Assistant-*.md
+files_to_compress.txt
+# ===== FAhubX 2.0 safety ignore rules =====
+
+# Nested dependencies
+**/node_modules/
+
+# Nested build outputs
+**/dist/
+**/build/
+**/coverage/
+
+# Installer staging / binaries
+installer/staging/pgsql/
+installer/staging/redis/
+installer/staging/node/
+installer/staging/backend/node_modules/
+installer/output/
+installer/deps/
+*.exe
+*.msi
+*.zip
+*.7z
+*.rar
+*.tar.gz
+*.tar.bz2
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+!.env.local.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Logs / temp
+*.log
+logs/
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Local runtime / browser data
+data/browsers/
+license-cache.json
+
+# Screenshots / debug media
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Claude / local agent state
+.claude/
+state/
+memory/
+
+
+# ===== FAhubX 2.0 initial repo cleanup ignore rules =====
+
+# Old reports / delivery docs from 1.0
+*_REPORT.md
+*_COMPLETION.md
+*_COMPLETION_REPORT.md
+*_SUMMARY.md
+*_GUIDE.md
+*_CHECKLIST.md
+*_PLAN.md
+FINAL_*.md
+PHASE*.md
+Phase*.md
+01_project_status.md
+02_completed_work.md
+03_next_phase_plan.md
+04_risks_issues.md
+05_handoff_for_new_chat.md
+06_dual_entry_unified_inbound_contract_baseline.md
+07_unified_inbound_intent_dispatch_skeleton.md
+HANDOFF_*.md
+
+# Large / generated docs and media
+*.pdf
+*.docx
+*.html
+DEMO_VIDEOS/
+TRAINING_DOCUMENTS/
+Facebook_Auto_Bot_Project_Delivery_Package/
+
+# Old phase / test / infra experiment folders
+Phase2.2-VPN-Health-Monitoring/
+phase2/
+phase2.2/
+phase3/
+e2e-tests/
+performance-tests/
+test-reports/
+test-data/
+benchmark-suite/
+backup-system/
+recovery-procedures/
+recovery-test-results/
+optimization-implementation/
+monitoring-config/
+security-tests/
+security-fixes/
+security-monitoring/
+security-config/
+real-time-monitor/
+real-time-push/
+websocket-server/
+whatsapp_bulk_system/
+ci-cd-integration/
+data-sync/
+deployment-scripts/
+infrastructure/
+kubernetes/
+operations-manual/
+
+# Loose test / migration scripts from old delivery
+test-*.js
+*-test.js
+check-*.js
+verify-*.js
+fix-*.js
+batch-fix-*.js
+generate_pdf.js
+convert_to_docx.py
+convert_to_pdf.*
+create_training_package.sh
+run-performance-tests.sh
+validate-migration.sh
+check-migration.sh
+swagger-config.yaml
+
+
+# ===== FAhubX 2.0 ignore remaining legacy loose files =====
+
+# Root-level legacy docs not needed for initial 2.0 repo
+AGENTS.md
+API_DOCUMENTATION.md
+BOOTSTRAP.md
+CORE_REQUIREMENTS_VALIDATION.md
+DELIVERY_INSTRUCTIONS.md
+E2E_TEST_SUITE.md
+FAQ.md
+HEARTBEAT.md
+IDENTITY.md
+PRODUCTION_DEPLOYMENT_CONFIG.md
+PROJECT_ACCEPTANCE_PREPARATION.md
+QUICK_START_DEPLOYMENT.md
+REAL_TIME_SYSTEM.md
+SECURITY_ASSESSMENT_REPORT_FINAL.md
+SOUL.md
+TASK_SCHEDULER_MODULE.md
+TECH_SUPPORT.md
+TOOLS.md
+TRAINING_MATERIALS_README.md
+USER.md
+USER_MANUAL.md
+VERSION_HISTORY.md
+system-test-report.md
+api-issues-fixed.md
+whatsapp_bulk_system_architecture.md
+
+# Root-level legacy scripts
+accurate-jsx-check.js
+api-test-suite.js
+whatsapp_hybrid_strategy_implementation.js
+start-dev.sh
+
+# Root-level Chinese / WhatsApp / old product docs
+*.txt
+*WhatsApp*
+*Facebook_Auto_Bot*
+*Facebook Auto Bot*
+*PDF*
+*代码质量*
+*修复完成*
+*功能及操作*
+*功能演示*
+*反检测*
+*后端API*
+*工程实现*
+*工程技术蓝图*
+*登录状态*
+*详细开发*
+*账号管理*
+*项目启动*
+*项目状态*
+*快速验证*
+
+
+# Remaining legacy blueprint docs
+工程蓝图/
+工程蓝图完成报告.md
+
+
+# Frontend generated dev PWA build output
+frontend/dev-dist/
+

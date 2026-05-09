@@ -1,0 +1,15 @@
+{
+  "name": "fahubx-installer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FAhubX Windows Installer build tools",
+  "scripts": {
+    "build": "build.bat",
+    "build:backend": "build-backend.bat",
+    "build:frontend": "build-frontend.bat",
+    "obfuscate": "node obfuscate.js"
+  },
+  "devDependencies": {
+    "javascript-obfuscator": "^4.1.1"
+  }
+}
