@@ -55,6 +55,7 @@ async function bootstrap() {
   // 获取配置服务
   const configService = app.get(ConfigService);
 
+  // TODO(2.0): cloud-mode only — isolate before local Windows packaging
   // ── 生产环境启动校验：禁止使用默认密钥 ────────────────────────────────────
   if (process.env.NODE_ENV === 'production' && process.env.DEPLOY_MODE !== 'local') {
     const jwtSecret = configService.get('JWT_SECRET', '');

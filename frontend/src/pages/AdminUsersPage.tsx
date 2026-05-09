@@ -1,3 +1,7 @@
+// TODO(2.0): cloud-mode only — isolate before local Windows packaging
+// AdminUsersPage manages multi-tenant SaaS users (admin creates/suspends tenants,
+// sets plans, manages subscriptionExpiry). In local Windows deployment each install
+// is a single tenant; this page is not needed. Review for removal in Phase 5.
 import React, { useState, useEffect, useMemo } from 'react';
 import {
   Card, Table, Button, Space, Typography, Tag, Modal, Form, Input,

@@ -1,3 +1,6 @@
+// TODO(2.0): cloud-mode only — isolate before local Windows packaging
+// VPNClientModule manages VPS server-side VPN configs and IP pools.
+// Not required for local Windows deployment; remove or stub out in Phase 5.
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ScheduleModule } from '@nestjs/schedule';

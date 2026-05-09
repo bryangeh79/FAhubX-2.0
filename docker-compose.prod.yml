@@ -1,3 +1,7 @@
+# TODO(2.0): cloud-mode only — isolate before local Windows packaging
+# This entire file defines the VPS/cloud container stack (Nginx, RabbitMQ, MinIO,
+# Prometheus, Grafana, Loki, Promtail, node-exporter). Not used in local Windows
+# deployment. Retain for cloud reference; do not ship in installer.
 # Facebook Auto Bot 生产环境 Docker Compose 配置
 version: '3.8'
 

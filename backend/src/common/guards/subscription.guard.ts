@@ -39,6 +39,7 @@ export class SubscriptionGuard implements CanActivate {
       return true;
     }
 
+    // TODO(2.0): cloud-mode only — isolate before local Windows packaging
     // ── Cloud 模式：查数据库（现有逻辑不变）─────────────────────────────
     const request = context.switchToHttp().getRequest();
     const userId = request.user?.sub || request.user?.id;
