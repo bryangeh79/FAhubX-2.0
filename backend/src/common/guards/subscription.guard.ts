@@ -19,7 +19,7 @@ export class SubscriptionGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const deployMode = process.env.DEPLOY_MODE || 'cloud';
+    const deployMode = process.env.DEPLOY_MODE || 'local'; // 2.0 default: local mode
 
     // ── Local 模式：检查 License 有效性 ──────────────────────────────────
     if (deployMode === 'local') {

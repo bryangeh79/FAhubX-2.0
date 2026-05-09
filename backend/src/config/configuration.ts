@@ -1,7 +1,7 @@
 export default () => ({
   // 应用配置
   app: {
-    name: process.env.APP_NAME || 'Facebook Auto Bot',
+    name: process.env.APP_NAME || 'FAhubX 2.0',
     version: process.env.APP_VERSION || '1.0.0',
     env: process.env.NODE_ENV || 'development',
     port: parseInt(process.env.PORT, 10) || 3000,
@@ -32,6 +32,7 @@ export default () => ({
     tls: process.env.REDIS_TLS === 'true',
   },
 
+  // TODO(2.0): cloud-mode only — RabbitMQ not used in local Windows deployment
   // RabbitMQ配置
   rabbitmq: {
     url: process.env.RABBITMQ_URL || 'amqp://localhost:5672',
@@ -40,6 +41,7 @@ export default () => ({
     queuePrefix: process.env.RABBITMQ_QUEUE_PREFIX || 'fbautobot',
   },
 
+  // TODO(2.0): cloud-mode only — MinIO object storage not used in local Windows deployment
   // MinIO配置
   minio: {
     endpoint: process.env.MINIO_ENDPOINT || 'localhost:9000',
@@ -112,6 +114,7 @@ export default () => ({
     scope: process.env.FACEBOOK_SCOPE || 'email,public_profile,pages_manage_posts,pages_read_engagement',
   },
 
+  // TODO(2.0): cloud-mode only — email/SMTP not used in local Windows deployment
   // 邮件配置
   email: {
     host: process.env.SMTP_HOST || 'smtp.gmail.com',

@@ -1,0 +1,56 @@
+# FAhubX 2.0 — Local Development Docker Compose
+#
+# Minimal stack for local Windows development:
+# - PostgreSQL (replaces portable pgsql/ in final installer)
+# - Redis      (replaces portable redis/ in final installer)
+#
+# NOT for production. NOT for the installer.
+# The installer uses portable binaries in installer/staging/pgsql and installer/staging/redis.
+# This file is for developers who prefer Docker over portable binaries.
+#
+# Usage:
+#   docker compose -f docker-compose.local.yml up -d
+#   cd backend && npm run start:dev
+#   cd frontend && npm run dev
+
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: fahubx2-postgres-local
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: fbautobot
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: localdev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - fahubx2_postgres_local:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: fahubx2-redis-local
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - fahubx2_redis_local:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  fahubx2_postgres_local:
+    driver: local
+  fahubx2_redis_local:
+    driver: local
