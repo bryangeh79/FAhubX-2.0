@@ -1,9 +1,25 @@
 # FAhubX 2.0 — Installer Readiness Audit
 
 **Date:** 2026-05-10
-**Phase:** 6A — Readiness audit (pre-build)
+**Phase:** 6B — Config fixes and staging rebuild (updated)
 **Auditor:** CC Runner (automated)
 **Backend TypeScript:** `npx tsc --noEmit` → **ZERO ERRORS** ✅
+
+---
+
+## Phase 6B Changes (2026-05-10)
+
+| Item | Before | After |
+|------|--------|-------|
+| `.iss` app name | `"FAhubX"` | `"FAhubX 2.0"` |
+| `.iss` version | `"1.4.2"` | `"2.0.0"` |
+| `.iss` install dir | `C:\FAhubX` | `C:\FAhubX2` (avoids 1.0 conflict) |
+| `generate-env.js` APP_NAME | `FAhubX` | `FAhubX 2.0` |
+| `build-backend.bat` Puppeteer | `C:\FAhubX` fallback | Project-relative only |
+| Backend staging | Stale (pre-Phase-5) | **Rebuilt** ✅ |
+| Frontend staging | Stale (had AdminUsersPage) | **Rebuilt** ✅ (0 AdminUsersPage chunks) |
+| Bull in staged package.json | Not verified | **0 references** ✅ |
+| Puppeteer-cache in staging | Present (old) | **Missing** ⚠️ (no source; downloads on first run) |
 
 ---
 
@@ -12,16 +28,17 @@
 | Category | Status | Notes |
 |----------|--------|-------|
 | Backend source | ✅ Ready | TypeScript passes, local-mode defaults set |
-| Backend package-lock | ✅ Reconciled | Updated via `npm install --legacy-peer-deps` |
+| Backend package-lock | ✅ Reconciled | Updated Phase 6A |
 | Frontend source | ✅ Ready | AdminUsersPage route disabled |
-| Installer script (.iss) | ⚠️ Needs update | Version "1.4.2" → should be "2.0.0"; name "FAhubX" → "FAhubX 2.0" |
+| Installer script (.iss) | ✅ Updated | Version 2.0.0, name FAhubX 2.0, dir C:\FAhubX2 |
 | Staging: Node.js | ✅ Present | v20.18.0 (node.exe staged) |
 | Staging: PostgreSQL | ✅ Present | Portable binaries staged |
 | Staging: Redis | ✅ Present | Portable binaries staged |
-| Staging: Backend | ⚠️ Stale | Built before Phase 5 cleanup — must rebuild |
-| Staging: Frontend | ⚠️ Stale | Built before Phase 5C — still includes AdminUsersPage chunk |
+| Staging: Backend | ✅ Rebuilt (Phase 6B) | Fresh dist, 0 bull packages |
+| Staging: Frontend | ✅ Rebuilt (Phase 6B) | 0 AdminUsersPage chunks |
+| Staging: Puppeteer | ⚠️ Missing | Chromium auto-downloads on first run |
 | Runtime scripts | ✅ Present | start.bat, stop.bat, init-db.bat, fahubx.bat |
-| env generator | ⚠️ Minor fix | APP_NAME still "FAhubX" — should be "FAhubX 2.0" |
+| env generator | ✅ Fixed (Phase 6B) | APP_NAME=FAhubX 2.0; SERVE_STATIC + LICENSE_SERVER_URL present |
 | obfuscate.js | ✅ Present | `installer/obfuscate.js` exists |
 | build.bat pipeline | ✅ Ready | Orchestrates all 4 build phases |
 

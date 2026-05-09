@@ -5,9 +5,10 @@
 ; Requires: Inno Setup 6.x (https://jrsoftware.org/isinfo.php)
 ; ============================================================
 
-#define MyAppName "FAhubX"
-#define MyAppVersion "1.4.2"
-#define MyAppPublisher "FAhubX"
+#define MyAppName "FAhubX 2.0"
+#define MyAppVersion "2.0.0"
+#define MyAppDir "FAhubX2"
+#define MyAppPublisher "Starbright Solutions"
 #define MyAppURL "https://fahubx.starbright-solutions.com"
 #define MyAppExeName "FAhubX.bat"
 
@@ -18,7 +19,7 @@ AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
-DefaultDirName=C:\{#MyAppName}
+DefaultDirName=C:\{#MyAppDir}
 DefaultGroupName={#MyAppName}
 OutputDir=output
 OutputBaseFilename=FAhubX-Setup-v{#MyAppVersion}

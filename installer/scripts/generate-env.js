@@ -72,7 +72,7 @@ function main() {
 # --- Application ---
 NODE_ENV=production
 DEPLOY_MODE=${deployMode}
-APP_NAME=FAhubX
+APP_NAME=FAhubX 2.0
 PORT=${appPort}
 HOST=127.0.0.1
 API_PREFIX=api

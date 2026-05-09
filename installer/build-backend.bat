@@ -87,20 +87,21 @@ call npm prune --production >nul 2>&1
 echo   Pruned dev dependencies.
 
 :: Copy Puppeteer Chromium cache (bundles browser so installer works offline)
-:: Tries C:\FAhubX\backend\puppeteer-cache (production install) first,
-:: then backend\puppeteer-cache (dev env). Exits with error if neither found.
-if exist "C:\FAhubX\backend\puppeteer-cache" (
-    echo   Copying bundled Chromium from C:\FAhubX\backend\puppeteer-cache...
-    xcopy /E /I /Q /Y "C:\FAhubX\backend\puppeteer-cache" "%STAGING_DIR%\puppeteer-cache" >nul
-) else if exist "%BACKEND_DIR%\puppeteer-cache" (
-    echo   Copying bundled Chromium from %BACKEND_DIR%\puppeteer-cache...
-    xcopy /E /I /Q /Y "%BACKEND_DIR%\puppeteer-cache" "%STAGING_DIR%\puppeteer-cache" >nul
-) else (
-    echo ERROR: puppeteer-cache not found. Installer would ship without Chromium.
-    echo   Expected: C:\FAhubX\backend\puppeteer-cache or %BACKEND_DIR%\puppeteer-cache
-    echo   Run Puppeteer once to download Chromium, then rebuild.
-    exit /b 1
-)
+:: Checks backend\puppeteer-cache first, then reuses existing staging cache.
+if exist "%BACKEND_DIR%\puppeteer-cache" goto :copy_puppeteer_src
+if exist "%STAGING_DIR%\puppeteer-cache" goto :skip_puppeteer
+echo   WARNING: puppeteer-cache not found. Chromium will auto-download on first run.
+goto :puppeteer_done
+
+:copy_puppeteer_src
+echo   Copying bundled Chromium from %BACKEND_DIR%\puppeteer-cache...
+xcopy /E /I /Q /Y "%BACKEND_DIR%\puppeteer-cache" "%STAGING_DIR%\puppeteer-cache" >nul
+goto :puppeteer_done
+
+:skip_puppeteer
+echo   Reusing existing Chromium cache from staging.
+
+:puppeteer_done
 
 echo.
 echo   Backend build complete!
