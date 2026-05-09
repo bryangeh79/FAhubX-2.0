@@ -3,7 +3,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { RedisModule } from '@nestjs-modules/ioredis';
-import { BullModule } from '@nestjs/bull';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { EventEmitterModule } from '@nestjs/event-emitter';
@@ -63,32 +62,6 @@ import { AdminLicensesModule } from './modules/admin-licenses/admin-licenses.mod
       useClass: RedisConfig,
     }),
 
-    // TODO(2.0): cloud-mode only — BullModule uses Redis as a task queue for
-    // cloud SaaS task distribution. In local Windows mode tasks are driven by
-    // SimpleTasksModule (@Cron polling). Remove BullModule in Phase 5C.
-    // 消息队列模块
-    BullModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        redis: {
-          host: configService.get('REDIS_HOST'),
-          port: configService.get('REDIS_PORT'),
-          password: configService.get('REDIS_PASSWORD'),
-          db: configService.get('REDIS_DB', 0),
-        },
-        defaultJobOptions: {
-          removeOnComplete: true,
-          removeOnFail: false,
-          attempts: configService.get('TASK_RETRY_MAX_ATTEMPTS', 3),
-          backoff: {
-            type: 'exponential',
-            delay: configService.get('TASK_RETRY_DELAY', 300000),
-          },
-          timeout: configService.get('TASK_TIMEOUT', 1800000),
-        },
-      }),
-      inject: [ConfigService],
-    }),
 
     // 限流模块
     ThrottlerModule.forRootAsync({

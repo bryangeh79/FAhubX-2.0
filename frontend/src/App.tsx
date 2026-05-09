@@ -15,7 +15,9 @@ const ChatScriptsPage = lazy(() => import('./pages/ChatScriptsPage'));
 const VPNPage = lazy(() => import('./pages/VPNPage'));
 const LoginStatusPage = lazy(() => import('./pages/LoginStatusPage'));
 const AntiDetectionPage = lazy(() => import('./pages/AntiDetectionPage'));
-const AdminUsersPage = lazy(() => import('./pages/AdminUsersPage'));
+// TODO(2.0): cloud-mode only — AdminUsersPage is multi-tenant SaaS admin.
+// Route disabled for local Windows deployment. File retained; remove in Phase 5D.
+// const AdminUsersPage = lazy(() => import('./pages/AdminUsersPage'));
 const AdminLicensesPage = lazy(() => import('./pages/AdminLicensesPage'));
 const ActivationPage = lazy(() => import('./pages/ActivationPage'));
 
@@ -121,14 +123,7 @@ const App: React.FC = () => {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/admin/users"
-              element={
-                <ProtectedRoute>
-                  <AdminUsersPage />
-                </ProtectedRoute>
-              }
-            />
+            {/* TODO(2.0): cloud-mode only route removed — AdminUsersPage disabled */}
             <Route
               path="/admin/licenses"
               element={
