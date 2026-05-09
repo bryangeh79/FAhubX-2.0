@@ -63,6 +63,9 @@ import { AdminLicensesModule } from './modules/admin-licenses/admin-licenses.mod
       useClass: RedisConfig,
     }),
 
+    // TODO(2.0): cloud-mode only — BullModule uses Redis as a task queue for
+    // cloud SaaS task distribution. In local Windows mode tasks are driven by
+    // SimpleTasksModule (@Cron polling). Remove BullModule in Phase 5C.
     // 消息队列模块
     BullModule.forRootAsync({
       imports: [ConfigModule],
@@ -119,6 +122,8 @@ import { AdminLicensesModule } from './modules/admin-licenses/admin-licenses.mod
     AuthModule,
     UsersModule,
     FacebookAccountsModule,
+    // TODO(2.0): audit VpnModule — determine if it handles browser-profile proxy
+    // (keep) or VPS server-side VPN management (remove). See Phase 5C.
     VpnModule,
     ChatScriptsModule,
     SimpleTasksModule,

@@ -1,3 +1,7 @@
+// FAhubX 2.0 KEEP: AdminLicensesPage manages Cloudflare License Server entries.
+// This IS the 2.0 admin tool — the admin uses it to issue, revoke, and manage
+// customer license keys (machine binding, plan, expiry). Do NOT remove.
+// Note: tenant_name/email/username fields reflect license metadata, not SaaS tenants.
 import React, { useState, useEffect } from 'react';
 import {
   Table, Button, Modal, Form, Input, DatePicker, Select, Tag, Space,

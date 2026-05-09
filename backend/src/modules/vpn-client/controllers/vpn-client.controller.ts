@@ -1,3 +1,6 @@
+// TODO(2.0): cloud-mode only — isolate before local Windows packaging
+// VPNClientController exposes VPS-side VPN config and IP pool management APIs.
+// Not required for local Windows deployment. Remove in Phase 5C.
 import {
   Controller,
   Get,

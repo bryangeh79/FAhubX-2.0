@@ -1,3 +1,6 @@
+// TODO(2.0): cloud-mode only — isolate before local Windows packaging
+// VpnIntegrationService manages server-side VPN configs and IP pool assignments.
+// Not required for local Windows deployment. Remove in Phase 5C.
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

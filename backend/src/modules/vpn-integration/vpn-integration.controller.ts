@@ -1,3 +1,6 @@
+// TODO(2.0): cloud-mode only — isolate before local Windows packaging
+// VpnIntegrationController exposes VPS-side VPN/IP pool REST endpoints.
+// Not required for local Windows deployment. Remove in Phase 5C.
 import {
   Controller,
   Get,
