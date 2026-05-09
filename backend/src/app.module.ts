@@ -21,7 +21,9 @@ import { SimpleTasksModule } from './modules/simple-tasks/simple-tasks.module';
 import { WarmupModule } from './modules/warmup/warmup.module';
 import { LicenseModule } from './modules/license/license.module';
 import { AdminLicensesModule } from './modules/admin-licenses/admin-licenses.module';
-// import { VPNClientModule } from './modules/vpn-client/vpn-client.module';
+// TODO(2.0): Phase 5E — remove these commented-out cloud/SaaS module files entirely
+// (source files still exist; Bull dependency blocks deletion until account-batch
+//  task-queue, task-scheduler dirs are removed together)
 // import { TaskSchedulerModule } from './modules/task-scheduler/task-scheduler.module';
 // import { TaskQueueModule } from './modules/task-queue/task-queue.module';
 // import { TaskExecutorModule } from './modules/task-executor/task-executor.module';
@@ -31,7 +33,6 @@ import { AdminLicensesModule } from './modules/admin-licenses/admin-licenses.mod
 // import { AccountBatchModule } from './modules/account-batch/account-batch.module';
 // import { AccountHealthModule } from './modules/account-health/account-health.module';
 // import { AccountRecoveryModule } from './modules/account-recovery/account-recovery.module';
-// import { VpnIntegrationModule } from './modules/vpn-integration/vpn-integration.module';
 
 @Module({
   imports: [
@@ -95,8 +96,8 @@ import { AdminLicensesModule } from './modules/admin-licenses/admin-licenses.mod
     AuthModule,
     UsersModule,
     FacebookAccountsModule,
-    // TODO(2.0): audit VpnModule — determine if it handles browser-profile proxy
-    // (keep) or VPS server-side VPN management (remove). See Phase 5C.
+    // VpnModule: confirmed KEEP (Phase 5D) — user-facing VPN proxy config per account.
+    // Manages VpnConfig entity (stored in vpn-integration/entities/, shared path).
     VpnModule,
     ChatScriptsModule,
     SimpleTasksModule,
@@ -105,7 +106,6 @@ import { AdminLicensesModule } from './modules/admin-licenses/admin-licenses.mod
     // License 模块（local 和 cloud 模式都加载，但 service 内部自动跳过 cloud 逻辑）
     LicenseModule,
     AdminLicensesModule,
-    // VPNClientModule,        // TODO: fix missing service files
     // TaskSchedulerModule,
     // TaskQueueModule,
     // TaskExecutorModule,
@@ -115,7 +115,6 @@ import { AdminLicensesModule } from './modules/admin-licenses/admin-licenses.mod
     // AccountBatchModule,
     // AccountHealthModule,
     // AccountRecoveryModule,
-    // VpnIntegrationModule,
   ],
   controllers: [],
   providers: [],

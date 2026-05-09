@@ -1,8 +1,8 @@
 # FAhubX 2.0 — Local Deployment Hardening Plan
 
 **Date:** 2026-05-10
-**Phase:** 5A — Local mode safe defaults
-**Status:** In progress
+**Phase:** 5D — Final cloud module cleanup (updated)
+**Status:** Phases 5A–5D complete; Phase 5E planned
 
 ---
 
@@ -155,16 +155,37 @@ and `installer/staging/redis/` are used instead of Docker.
 
 ---
 
-## Phase 5B Plan
+## Phase 5D Completion Status
 
-1. Remove cloud DB branch from `SubscriptionGuard` (keep local branch only)
-2. Remove `VPNClientModule` import from `AppModule` (and delete its unused service files)
-3. Remove `VpnIntegrationModule` import (already commented out — delete files)
-4. Remove or make optional: `BullModule`, `RabbitMQ` config
-5. Remove `AdminUsersPage.tsx` or convert to local single-tenant equivalent
-6. Audit `VpnModule` — is it used for browser proxy or VPS VPN? Keep or remove accordingly
-7. Update `backend/.env.local.example` to remove cloud-only vars (RabbitMQ, MinIO, email SMTP)
-8. Smoke-test: start backend in local mode, verify license activation flow works end-to-end
+| Action | Status |
+|--------|--------|
+| Delete `vpn-client/` directory | ✅ Done (Phase 5D) |
+| Delete `vpn-integration/` service, controller, module | ✅ Done (Phase 5D) |
+| Delete `vpn-integration/entities/ip-pool.entity.ts` | ✅ Done (Phase 5D) |
+| Keep `vpn-integration/entities/vpn-config.entity.ts` | ✅ Kept (used by active vpn/ module) |
+| Delete `AdminUsersPage.tsx` | ✅ Done (Phase 5D) |
+| Remove BullModule from AppModule | ✅ Done (Phase 5C) |
+| Remove cloud DB branch from SubscriptionGuard | ✅ Done (Phase 5C) |
+| Disable AdminUsersPage route in App.tsx | ✅ Done (Phase 5C) |
+| DEPLOY_MODE default to local | ✅ Done (Phase 5A) |
+| VpnModule classified as KEEP | ✅ Confirmed (Phase 5D) — user VPN proxy config |
+| Prune @nestjs/bull, bull packages | ⏳ Phase 5E — blocked by account-batch/task-queue/task-scheduler files |
+
+---
+
+## Phase 5E Plan
+
+1. Delete `backend/src/modules/account-batch/` directory
+2. Delete `backend/src/modules/task-queue/` directory
+3. Delete `backend/src/modules/task-scheduler/` directory
+4. Delete `backend/src/modules/task-executor/` directory (if not used by SimpleTasksModule)
+5. Remove `@nestjs/bull` and `bull` from `backend/package.json` after above deletions
+6. Verify `npx tsc --noEmit` passes after all deletions
+7. Move `vpn-integration/entities/vpn-config.entity.ts` into `vpn/entities/` to
+   eliminate the partial `vpn-integration/` directory remnant
+8. Update `database.config.ts` entity glob path accordingly
+9. Update imports in `vpn/vpn.module.ts` and `vpn/vpn.service.ts`
+10. Final smoke-test: start backend with `DEPLOY_MODE=local`, verify license activation flow
 
 ---
 
