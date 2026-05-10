@@ -4,12 +4,12 @@
 // Note: tenant_name/email/username fields reflect license metadata, not SaaS tenants.
 import React, { useState, useEffect } from 'react';
 import {
-  Table, Button, Modal, Form, Input, DatePicker, Select, Tag, Space,
+  Table, Button, Modal, Form, Input, InputNumber, DatePicker, Select, Tag, Space,
   Typography, message, Card, Row, Col, Statistic, Popconfirm, Tooltip, Alert,
 } from 'antd';
 import {
   ReloadOutlined, DisconnectOutlined, EditOutlined, DeleteOutlined,
-  KeyOutlined, DesktopOutlined, WarningOutlined,
+  KeyOutlined, DesktopOutlined, WarningOutlined, PlusOutlined, CopyOutlined,
 } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import AppLayout from '../components/AppLayout';
@@ -47,6 +47,12 @@ interface Dashboard {
   onlineNow: number;
 }
 
+const PLAN_DEFAULTS: Record<string, { max_accounts: number; max_tasks: number; max_scripts: number }> = {
+  basic:      { max_accounts: 10,  max_tasks: 50,  max_scripts: 10 },
+  pro:        { max_accounts: 30,  max_tasks: 200, max_scripts: 50 },
+  enterprise: { max_accounts: 50,  max_tasks: 300, max_scripts: 100 },
+};
+
 const AdminLicensesPage: React.FC = () => {
   const t = useT();
   const [loading, setLoading] = useState(false);
@@ -55,6 +61,12 @@ const AdminLicensesPage: React.FC = () => {
   const [editing, setEditing] = useState<License | null>(null);
   const [configError, setConfigError] = useState<string | null>(null);
   const [form] = Form.useForm();
+
+  // Create license state
+  const [creating, setCreating] = useState(false);
+  const [createLoading, setCreateLoading] = useState(false);
+  const [createForm] = Form.useForm();
+  const [createdKey, setCreatedKey] = useState<string | null>(null);
 
   const loadData = async () => {
     setLoading(true);
@@ -85,6 +97,45 @@ const AdminLicensesPage: React.FC = () => {
   };
 
   useEffect(() => { loadData(); /* eslint-disable-next-line */ }, []);
+
+  const handlePlanChange = (plan: string) => {
+    const defaults = PLAN_DEFAULTS[plan];
+    if (defaults) createForm.setFieldsValue(defaults);
+  };
+
+  const handleCreate = async () => {
+    let values: any;
+    try { values = await createForm.validateFields(); } catch { return; }
+    setCreateLoading(true);
+    try {
+      const payload: any = {
+        tenant_name: values.tenant_name,
+        tenant_email: values.tenant_email || undefined,
+        tenant_username: values.tenant_username || undefined,
+        plan: values.plan,
+        max_accounts: values.max_accounts,
+        max_tasks: values.max_tasks,
+        max_scripts: values.max_scripts,
+        notes: values.notes || undefined,
+      };
+      if (values.expires_at) {
+        payload.expires_at = values.expires_at.toISOString();
+        payload.subscription_expiry = values.expires_at.toISOString();
+      }
+      const res = await api.post('/admin/licenses', payload);
+      const data = res.data?.data || res.data || {};
+      const key = data.license_key || data.key || data.licenseKey || '';
+      setCreating(false);
+      createForm.resetFields();
+      setCreatedKey(key);
+      loadData();
+      message.success('License created successfully!');
+    } catch (err: any) {
+      message.error('Create failed: ' + (err.response?.data?.message || err.message));
+    } finally {
+      setCreateLoading(false);
+    }
+  };
 
   const handleUnbind = async (id: string) => {
     try {
@@ -241,7 +292,16 @@ const AdminLicensesPage: React.FC = () => {
             <Title level={3} style={{ margin: 0 }}>{t('adminLicenses.title')}</Title>
             <Paragraph type="secondary">{t('adminLicenses.subtitle')}</Paragraph>
           </div>
-          <Button icon={<ReloadOutlined />} onClick={loadData} loading={loading}>{t('adminLicenses.refresh')}</Button>
+          <Space>
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={() => { setCreating(true); createForm.resetFields(); createForm.setFieldsValue({ plan: 'basic', ...PLAN_DEFAULTS.basic }); }}
+            >
+              创建 License
+            </Button>
+            <Button icon={<ReloadOutlined />} onClick={loadData} loading={loading}>{t('adminLicenses.refresh')}</Button>
+          </Space>
         </div>
 
         {configError && (
@@ -289,6 +349,102 @@ const AdminLicensesPage: React.FC = () => {
           />
         </Card>
 
+        {/* ── Create License Modal ── */}
+        <Modal
+          title="创建 License / Create Customer Authorization"
+          open={creating}
+          onOk={handleCreate}
+          onCancel={() => { setCreating(false); createForm.resetFields(); }}
+          okText="创建 / Create"
+          cancelText={t('common.cancel')}
+          confirmLoading={createLoading}
+          width={560}
+        >
+          <Form form={createForm} layout="vertical" style={{ marginTop: 16 }}>
+            <Form.Item label="客户姓名 / Tenant Name" name="tenant_name" rules={[{ required: true, message: 'Please enter tenant name' }]}>
+              <Input placeholder="e.g. John Doe" />
+            </Form.Item>
+            <Row gutter={12}>
+              <Col span={12}>
+                <Form.Item label="邮箱 / Email" name="tenant_email">
+                  <Input placeholder="customer@example.com" />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item label="用户名 / Username" name="tenant_username">
+                  <Input placeholder="johndoe" />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Form.Item label="套餐 / Plan" name="plan" rules={[{ required: true }]}>
+              <Select onChange={handlePlanChange}>
+                <Select.Option value="basic">Basic — 10 账号 / 50 任务</Select.Option>
+                <Select.Option value="pro">Pro — 30 账号 / 200 任务</Select.Option>
+                <Select.Option value="enterprise">Enterprise — 50 账号 / 300 任务</Select.Option>
+              </Select>
+            </Form.Item>
+            <Row gutter={12}>
+              <Col span={8}>
+                <Form.Item label="最大账号数" name="max_accounts" rules={[{ required: true }]}>
+                  <InputNumber min={1} max={9999} style={{ width: '100%' }} />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item label="最大任务数" name="max_tasks" rules={[{ required: true }]}>
+                  <InputNumber min={1} max={9999} style={{ width: '100%' }} />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item label="最大剧本数" name="max_scripts" rules={[{ required: true }]}>
+                  <InputNumber min={1} max={9999} style={{ width: '100%' }} />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Form.Item label="到期日 / Expiry Date" name="expires_at" extra="Leave blank for no expiry">
+              <DatePicker style={{ width: '100%' }} />
+            </Form.Item>
+            <Form.Item label="备注 / Notes" name="notes">
+              <Input.TextArea rows={2} placeholder="Optional notes for this customer" />
+            </Form.Item>
+          </Form>
+        </Modal>
+
+        {/* ── Created Key Reveal Modal ── */}
+        <Modal
+          title="✅ License Created — Copy Key for Customer"
+          open={!!createdKey}
+          onOk={() => setCreatedKey(null)}
+          onCancel={() => setCreatedKey(null)}
+          okText="Done"
+          cancelButtonProps={{ style: { display: 'none' } }}
+          width={520}
+        >
+          <Alert
+            type="success"
+            message="License key generated. Send this key and the FAhubX 2.0 installer to your customer."
+            style={{ marginBottom: 16 }}
+          />
+          <div style={{ background: '#f5f5f5', borderRadius: 6, padding: '12px 16px', marginBottom: 8 }}>
+            <Text strong style={{ fontSize: 16, letterSpacing: 1, fontFamily: 'monospace' }}>
+              {createdKey}
+            </Text>
+          </div>
+          <Button
+            icon={<CopyOutlined />}
+            onClick={() => {
+              if (createdKey) {
+                navigator.clipboard.writeText(createdKey).then(() => message.success('License key copied!'));
+              }
+            }}
+          >
+            Copy License Key
+          </Button>
+          <div style={{ marginTop: 12, color: '#888', fontSize: 12 }}>
+            The key will also appear in the license list table.
+          </div>
+        </Modal>
+
+        {/* ── Edit License Modal ── */}
         <Modal
           title={t('adminLicenses.editLicense')}
           open={!!editing}

@@ -85,6 +85,28 @@ export class AdminLicensesController implements OnApplicationBootstrap {
     }
   }
 
+  /** 创建新 License（发授权给客户） */
+  @Post()
+  @ApiOperation({ summary: '创建新 License（Admin）' })
+  async create(@Request() req, @Body() body: any) {
+    this.assertAdmin(req);
+    const { url, key } = this.getServerConfig();
+    const { default: axios } = await import('axios');
+    try {
+      const res = await axios.post(`${url}/admin/licenses`, body, {
+        headers: { Authorization: `Bearer ${key}` },
+        timeout: 10000,
+      });
+      this.logger.log(`🔑 New license created (by admin ${req.user.email}): plan=${body.plan || '?'}`);
+      return res.data;
+    } catch (err: any) {
+      this.logger.error(`创建 License 失败: ${err.response?.status} ${err.message}`);
+      throw new BadGatewayException(
+        'License creation failed: ' + (err.response?.data?.error || err.message),
+      );
+    }
+  }
+
   /** 解绑机器（租户换电脑时用） */
   @Post(':id/unbind')
   @ApiOperation({ summary: '解绑 License 的机器绑定（Admin）' })
