@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Delete, Body, Param, UseGuards, Request, Logger, ForbiddenException, ServiceUnavailableException, BadGatewayException } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Body, Param, UseGuards, Request, Logger, ForbiddenException, ServiceUnavailableException, BadGatewayException, OnApplicationBootstrap } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -12,10 +12,23 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 @Controller('admin/licenses')
-export class AdminLicensesController {
+export class AdminLicensesController implements OnApplicationBootstrap {
   private readonly logger = new Logger(AdminLicensesController.name);
 
   constructor(private readonly configService: ConfigService) {}
+
+  onApplicationBootstrap() {
+    const key = this.configService.get('LICENSE_ADMIN_KEY', '');
+    const configured = Boolean(key);
+    if (configured) {
+      this.logger.log('License Server admin key: configured ✅');
+    } else {
+      this.logger.warn(
+        'License Server admin key: NOT configured ⚠️ — ' +
+        'add LICENSE_ADMIN_KEY=<key> to backend/.env and restart FAhubX.',
+      );
+    }
+  }
 
   private assertAdmin(req: any) {
     if (req.user?.role !== 'admin') {
