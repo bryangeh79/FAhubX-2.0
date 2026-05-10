@@ -132,8 +132,20 @@ if errorlevel 1 (
 )
 echo   Migrations complete.
 
-:: Step 5: Stop PostgreSQL
-echo [5/5] Stopping PostgreSQL...
+:: Step 5: Bootstrap default local admin user
+echo [5/6] Creating default admin account...
+cd /d "%BACKEND_DIR%"
+"%NODE%" database\bootstrap-local-admin.js
+if errorlevel 1 (
+    echo WARNING: Admin bootstrap failed.
+    echo          You can create an admin manually after first start.
+    echo          Email: admin@fahubx.local  Password: ChangeMe123!
+    rem Continue anyway - migrations already succeeded
+)
+echo   Admin bootstrap complete.
+
+:: Step 6: Stop PostgreSQL
+echo [6/6] Stopping PostgreSQL...
 cd /d "%FAHUBX_HOME%"
 "%PG_BIN%\pg_ctl.exe" stop -D "%PG_DATA%" -m fast -w >nul 2>&1
 echo   PostgreSQL stopped.
