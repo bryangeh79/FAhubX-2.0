@@ -73,7 +73,30 @@ export class SimpleTasksService {
       `SELECT role, max_tasks AS "maxTasks" FROM users WHERE id = $1`,
       [userId],
     );
-    if (user && user.role !== 'admin') {
+
+    // In local mode: enforce license-based quota for ALL users (including admin).
+    // Admin role must not bypass quota in local deployment.
+    if (process.env.DEPLOY_MODE === 'local') {
+      let maxTasks = user?.maxTasks ?? 300;
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const fs = require('fs');
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const path = require('path');
+        const cache = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'license-cache.json'), 'utf8'));
+        if (cache.valid && typeof cache.maxTasks === 'number') maxTasks = cache.maxTasks;
+      } catch { /* use DB fallback */ }
+      const [{ count }] = await this.dataSource.query(
+        `SELECT COUNT(*) AS count FROM tasks WHERE "userId" = $1 AND status NOT IN ('completed', 'failed', 'cancelled')`,
+        [userId],
+      );
+      if (parseInt(count, 10) >= maxTasks) {
+        throw new ForbiddenException(
+          `活跃任务已达上限（${count}/${maxTasks}），请删除已完成的任务`,
+        );
+      }
+    } else if (user && user.role !== 'admin') {
+      // Cloud mode: admin bypasses DB quota check; non-admin enforced
       const [{ count }] = await this.dataSource.query(
         `SELECT COUNT(*) AS count FROM tasks WHERE "userId" = $1 AND status NOT IN ('completed', 'failed', 'cancelled')`,
         [userId],

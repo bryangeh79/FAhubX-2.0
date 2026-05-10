@@ -4,7 +4,7 @@
 // Note: tenant_name/email/username fields reflect license metadata, not SaaS tenants.
 import React, { useState, useEffect } from 'react';
 import {
-  Table, Button, Modal, Form, Input, InputNumber, DatePicker, Select, Tag, Space,
+  Table, Button, Modal, Form, Input, DatePicker, Select, Tag, Space,
   Typography, message, Card, Row, Col, Statistic, Popconfirm, Tooltip, Alert,
 } from 'antd';
 import {
@@ -47,10 +47,11 @@ interface Dashboard {
   onlineNow: number;
 }
 
-const PLAN_DEFAULTS: Record<string, { max_accounts: number; max_tasks: number; max_scripts: number }> = {
-  basic:      { max_accounts: 10,  max_tasks: 50,  max_scripts: 10 },
-  pro:        { max_accounts: 30,  max_tasks: 200, max_scripts: 50 },
-  enterprise: { max_accounts: 50,  max_tasks: 300, max_scripts: 100 },
+// Phase 8A confirmed quotas: tasks/scripts same across plans; only accounts differ
+const PLAN_QUOTAS: Record<string, { maxAccounts: number; maxTasks: number; maxScripts: number }> = {
+  basic:      { maxAccounts: 10, maxTasks: 300, maxScripts: 100 },
+  pro:        { maxAccounts: 30, maxTasks: 300, maxScripts: 100 },
+  enterprise: { maxAccounts: 50, maxTasks: 300, maxScripts: 100 },
 };
 
 const AdminLicensesPage: React.FC = () => {
@@ -67,6 +68,7 @@ const AdminLicensesPage: React.FC = () => {
   const [createLoading, setCreateLoading] = useState(false);
   const [createForm] = Form.useForm();
   const [createdKey, setCreatedKey] = useState<string | null>(null);
+  const [createPlan, setCreatePlan] = useState<string>('basic');
 
   const loadData = async () => {
     setLoading(true);
@@ -99,8 +101,7 @@ const AdminLicensesPage: React.FC = () => {
   useEffect(() => { loadData(); /* eslint-disable-next-line */ }, []);
 
   const handlePlanChange = (plan: string) => {
-    const defaults = PLAN_DEFAULTS[plan];
-    if (defaults) createForm.setFieldsValue(defaults);
+    setCreatePlan(plan);
   };
 
   const handleCreate = async () => {
@@ -116,7 +117,7 @@ const AdminLicensesPage: React.FC = () => {
       };
       if (values.tenant_email)    payload.tenantEmail    = values.tenant_email;
       if (values.tenant_username) payload.tenantUsername = values.tenant_username;
-      if (values.max_scripts)     payload.maxScripts     = values.max_scripts;
+      // Quotas are derived from plan by the License Server; do not send manual overrides
       if (values.notes)           payload.notes          = values.notes;
       if (values.expires_at) {
         payload.expiresAt          = values.expires_at.toISOString();
@@ -297,7 +298,7 @@ const AdminLicensesPage: React.FC = () => {
             <Button
               type="primary"
               icon={<PlusOutlined />}
-              onClick={() => { setCreating(true); createForm.resetFields(); createForm.setFieldsValue({ plan: 'basic', ...PLAN_DEFAULTS.basic }); }}
+              onClick={() => { setCreating(true); setCreatePlan('basic'); createForm.resetFields(); createForm.setFieldsValue({ plan: 'basic' }); }}
             >
               创建 License
             </Button>
@@ -379,28 +380,21 @@ const AdminLicensesPage: React.FC = () => {
             </Row>
             <Form.Item label="套餐 / Plan" name="plan" rules={[{ required: true }]}>
               <Select onChange={handlePlanChange}>
-                <Select.Option value="basic">Basic — 10 账号 / 50 任务</Select.Option>
-                <Select.Option value="pro">Pro — 30 账号 / 200 任务</Select.Option>
-                <Select.Option value="enterprise">Enterprise — 50 账号 / 300 任务</Select.Option>
+                <Select.Option value="basic">Basic — 10 账号 / 300 任务 / 100 剧本</Select.Option>
+                <Select.Option value="pro">Pro — 30 账号 / 300 任务 / 100 剧本</Select.Option>
+                <Select.Option value="enterprise">Enterprise — 50 账号 / 300 任务 / 100 剧本</Select.Option>
               </Select>
             </Form.Item>
-            <Row gutter={12}>
-              <Col span={8}>
-                <Form.Item label="最大账号数" name="max_accounts" rules={[{ required: true }]}>
-                  <InputNumber min={1} max={9999} style={{ width: '100%' }} />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item label="最大任务数" name="max_tasks" rules={[{ required: true }]}>
-                  <InputNumber min={1} max={9999} style={{ width: '100%' }} />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item label="最大剧本数" name="max_scripts" rules={[{ required: true }]}>
-                  <InputNumber min={1} max={9999} style={{ width: '100%' }} />
-                </Form.Item>
-              </Col>
-            </Row>
+            <Form.Item label="配套配额 / Plan Quota">
+              <div style={{ background: '#f6f8fa', borderRadius: 6, padding: '8px 12px', fontSize: 13, color: '#444' }}>
+                {(() => { const q = PLAN_QUOTAS[createPlan]; return q
+                  ? `最多 ${q.maxAccounts} 个Facebook账号 · 最多 ${q.maxTasks} 个任务 · 最多 ${q.maxScripts} 个剧本`
+                  : '— 请先选择套餐 —'; })()}
+                <div style={{ color: '#888', marginTop: 4, fontSize: 11 }}>
+                  配额由套餐决定，创建后可通过License Server修改
+                </div>
+              </div>
+            </Form.Item>
             <Form.Item label="到期日 / Expiry Date" name="expires_at" extra="Leave blank for no expiry">
               <DatePicker style={{ width: '100%' }} />
             </Form.Item>

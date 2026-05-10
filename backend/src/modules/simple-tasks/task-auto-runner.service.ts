@@ -111,17 +111,27 @@ export class TaskAutoRunnerService implements OnModuleInit {
 
       // ── Subscription / License expiry guard ──────────────────────────────
       if (process.env.DEPLOY_MODE === 'local') {
-        // Local 模式：检查 License 缓存
+        // Local 模式：检查 License 缓存 — fail-closed if cache unreadable
+        let licenseOk = false;
         try {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           const cachePath = require('path').join(process.cwd(), 'license-cache.json');
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           const cache = JSON.parse(require('fs').readFileSync(cachePath, 'utf8'));
-          if (!cache.valid) {
+          licenseOk = Boolean(cache.valid);
+          if (!licenseOk) {
             this.logger.warn(`⏭ 跳过任务: ${task.name} — 许可证无效`);
             await this.saveTaskResult(task.id, false, cache.error || '许可证无效，任务无法执行');
             this.running.delete(task.id);
             continue;
           }
-        } catch {}
+        } catch {
+          // Cache file missing or corrupt — fail-closed, do not run task
+          this.logger.warn(`⏭ 跳过任务: ${task.name} — 许可证缓存不可读，任务暂停`);
+          await this.saveTaskResult(task.id, false, '许可证缓存读取失败，任务暂停。请确认许可证已激活。');
+          this.running.delete(task.id);
+          continue;
+        }
       } else if (task.userId) {
         // Cloud 模式：检查用户订阅
         const [owner] = await this.dataSource.query(

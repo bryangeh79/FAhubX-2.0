@@ -92,17 +92,31 @@ export class AdminLicensesController implements OnApplicationBootstrap {
     this.assertAdmin(req);
     const { url, key } = this.getServerConfig();
     const { default: axios } = await import('axios');
+    // Whitelist — only forward expected fields; never pass arbitrary body to Cloudflare
+    const payload: Record<string, any> = {};
+    if (body.tenantName)        payload.tenantName        = String(body.tenantName).slice(0, 200);
+    if (body.tenantEmail)       payload.tenantEmail       = String(body.tenantEmail).slice(0, 255);
+    if (body.tenantUsername)    payload.tenantUsername    = String(body.tenantUsername).slice(0, 100);
+    if (body.plan)              payload.plan              = String(body.plan).slice(0, 20);
+    if (body.expiresAt)         payload.expiresAt         = body.expiresAt;
+    if (body.subscriptionExpiry) payload.subscriptionExpiry = body.subscriptionExpiry;
+    if (body.notes)             payload.notes             = String(body.notes).slice(0, 500);
     try {
-      const res = await axios.post(`${url}/admin/licenses`, body, {
+      const res = await axios.post(`${url}/admin/licenses`, payload, {
         headers: { Authorization: `Bearer ${key}` },
         timeout: 10000,
       });
-      this.logger.log(`🔑 New license created (by admin ${req.user.email}): plan=${body.plan || '?'}`);
+      this.logger.log(`🔑 New license created (by admin ${req.user.email}): plan=${payload.plan || '?'}`);
       return res.data;
     } catch (err: any) {
-      this.logger.error(`创建 License 失败: ${err.response?.status} ${err.message}`);
+      const status = err.response?.status;
+      const serverMsg = err.response?.data?.error || err.response?.data?.message;
+      this.logger.error(`创建 License 失败: HTTP ${status}`);
+      // Return actionable message; do not expose internal URL/token/stack
       throw new BadGatewayException(
-        'License creation failed: ' + (err.response?.data?.error || err.message),
+        status === 400 && serverMsg
+          ? `Validation error: ${serverMsg}`
+          : 'License Server returned an error. Check your configuration and try again.',
       );
     }
   }
@@ -122,7 +136,8 @@ export class AdminLicensesController implements OnApplicationBootstrap {
       this.logger.log(`🔓 License ${id} 机器已解绑 (by admin ${req.user.email})`);
       return res.data;
     } catch (err: any) {
-      throw new BadGatewayException('Unbind failed: ' + err.message);
+      this.logger.error(`Unbind License ${id} 失败: HTTP ${err.response?.status}`);
+      throw new BadGatewayException('Unbind failed. Check License Server connectivity.');
     }
   }
 
@@ -133,15 +148,26 @@ export class AdminLicensesController implements OnApplicationBootstrap {
     this.assertAdmin(req);
     const { url, key } = this.getServerConfig();
     const { default: axios } = await import('axios');
+    // Whitelist — only forward expected update fields
+    const payload: Record<string, any> = {};
+    if (body.active !== undefined)          payload.active              = Boolean(body.active);
+    if (body.plan)                          payload.plan                = String(body.plan).slice(0, 20);
+    if (body.tenantName)                    payload.tenantName          = String(body.tenantName).slice(0, 200);
+    if (body.tenantEmail !== undefined)     payload.tenantEmail         = body.tenantEmail;
+    if (body.tenantUsername !== undefined)  payload.tenantUsername      = body.tenantUsername;
+    if ('expiresAt' in body)               payload.expiresAt           = body.expiresAt;
+    if ('subscriptionExpiry' in body)       payload.subscriptionExpiry  = body.subscriptionExpiry;
+    if (body.notes !== undefined)           payload.notes               = body.notes ? String(body.notes).slice(0, 500) : body.notes;
     try {
-      const res = await axios.patch(`${url}/admin/licenses/${id}`, body, {
+      const res = await axios.patch(`${url}/admin/licenses/${id}`, payload, {
         headers: { Authorization: `Bearer ${key}` },
         timeout: 10000,
       });
       this.logger.log(`✏️ License ${id} 已更新 (by admin ${req.user.email})`);
       return res.data;
     } catch (err: any) {
-      throw new BadGatewayException('Update failed: ' + err.message);
+      this.logger.error(`更新 License ${id} 失败: HTTP ${err.response?.status}`);
+      throw new BadGatewayException('Update failed. Check License Server connectivity.');
     }
   }
 
@@ -160,7 +186,8 @@ export class AdminLicensesController implements OnApplicationBootstrap {
       this.logger.log(`🗑️ License ${id} 已删除 (by admin ${req.user.email})`);
       return res.data;
     } catch (err: any) {
-      throw new BadGatewayException('Delete failed: ' + err.message);
+      this.logger.error(`删除 License ${id} 失败: HTTP ${err.response?.status}`);
+      throw new BadGatewayException('Delete failed. Check License Server connectivity.');
     }
   }
 }

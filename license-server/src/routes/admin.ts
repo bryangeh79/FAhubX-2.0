@@ -42,10 +42,11 @@ export async function handleCreateLicense(request: Request, env: Env): Promise<R
   }
 
   const plan = body.plan || 'basic';
+  // Phase 8A confirmed quotas: tasks/scripts identical across basic/pro/enterprise
   const planDefaults: Record<string, { maxAccounts: number; maxTasks: number; maxScripts: number }> = {
-    basic:      { maxAccounts: 10,   maxTasks: 50,   maxScripts: 10  },
-    pro:        { maxAccounts: 30,   maxTasks: 200,  maxScripts: 50  },
-    enterprise: { maxAccounts: 50,   maxTasks: 300,  maxScripts: 100 }, // v1.4.0
+    basic:      { maxAccounts: 10,   maxTasks: 300,  maxScripts: 100 },
+    pro:        { maxAccounts: 30,   maxTasks: 300,  maxScripts: 100 },
+    enterprise: { maxAccounts: 50,   maxTasks: 300,  maxScripts: 100 },
     admin:      { maxAccounts: 9999, maxTasks: 9999, maxScripts: 9999 },
   };
   const defaults = planDefaults[plan] || planDefaults.basic;
@@ -126,10 +127,12 @@ export async function handleUpdateLicense(request: Request, env: Env, id: string
 
   if (body.plan) {
     sets.push('plan = ?'); values.push(body.plan);
+    // Phase 8A: same centralized quotas as create; enterprise must not fall back to basic
     const planDefaults: Record<string, { maxAccounts: number; maxTasks: number; maxScripts: number }> = {
-      basic: { maxAccounts: 10,   maxTasks: 50,   maxScripts: 10 },
-      pro:   { maxAccounts: 30,   maxTasks: 200,  maxScripts: 50 },
-      admin: { maxAccounts: 9999, maxTasks: 9999, maxScripts: 9999 },
+      basic:      { maxAccounts: 10,   maxTasks: 300,  maxScripts: 100 },
+      pro:        { maxAccounts: 30,   maxTasks: 300,  maxScripts: 100 },
+      enterprise: { maxAccounts: 50,   maxTasks: 300,  maxScripts: 100 },
+      admin:      { maxAccounts: 9999, maxTasks: 9999, maxScripts: 9999 },
     };
     const d = planDefaults[body.plan] || planDefaults.basic;
     if (!body.maxAccounts) { sets.push('max_accounts = ?'); values.push(d.maxAccounts); }
