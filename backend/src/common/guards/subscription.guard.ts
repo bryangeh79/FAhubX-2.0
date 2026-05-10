@@ -23,8 +23,13 @@ export class SubscriptionGuard implements CanActivate {
       const { LicenseService } = await import('../../modules/license/license.service');
       const licenseService = this.moduleRef.get(LicenseService, { strict: false });
       if (licenseService && !licenseService.isValid()) {
+        const err = licenseService.getError() || '许可证无效';
+        // Surface a clear, actionable message — do not expose raw internal errors
+        const isKeyError = err.includes('Invalid license key') || err.includes('Machine mismatch');
         throw new ForbiddenException(
-          licenseService.getError() || '许可证无效或已过期，请联系管理员。',
+          isKeyError
+            ? '许可证密钥无效或已失效，请重新打开应用完成激活 (License key invalid — reload to re-activate).'
+            : `许可证验证失败: ${err}`,
         );
       }
     } catch (err) {

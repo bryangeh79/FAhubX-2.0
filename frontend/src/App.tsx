@@ -35,8 +35,19 @@ const App: React.FC = () => {
   useEffect(() => {
     api.get('/license/status').then((res) => {
       const data = res.data?.data || res.data;
-      if (data.isLocal && !data.activated) {
-        setNeedsActivation(true);
+      if (data.isLocal) {
+        if (!data.activated) {
+          // No license key at all — first-time setup
+          setNeedsActivation(true);
+        } else if (!data.valid && data.error) {
+          // License key present but rejected by License Server (invalid / deleted / deactivated).
+          // Do NOT redirect for transient offline errors — those are covered by the 24-hour grace period.
+          const isHardError =
+            data.error.includes('Invalid license key') ||
+            data.error.includes('License deactivated') ||
+            data.error.includes('Machine mismatch');
+          if (isHardError) setNeedsActivation(true);
+        }
       }
       setLicenseChecked(true);
     }).catch(() => {

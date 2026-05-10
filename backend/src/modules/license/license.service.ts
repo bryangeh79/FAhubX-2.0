@@ -98,7 +98,8 @@ export class LicenseService implements OnModuleInit {
           error: null,
         };
         this.saveCache();
-        this.logger.log(`✅ License activated: ${licenseKey} (${lic.plan}, ${lic.maxAccounts} accounts)`);
+        this.persistKeyToEnv(licenseKey); // ensure key survives cache loss/restart
+        this.logger.log(`✅ License activated: plan=${lic.plan} accounts=${lic.maxAccounts}`);
 
         // ── v2: Auto-create local user from License Server tenant info ──
         let userCreated = false;
@@ -337,5 +338,26 @@ export class LicenseService implements OnModuleInit {
   private getHoursSinceLastVerified(): number {
     if (!this.state.lastVerified) return Infinity;
     return (Date.now() - new Date(this.state.lastVerified).getTime()) / (1000 * 60 * 60);
+  }
+
+  /**
+   * Write LICENSE_KEY to .env so the key survives cache deletion and backend restarts.
+   * Safe: only replaces the LICENSE_KEY line; does not touch other env vars.
+   */
+  private persistKeyToEnv(licenseKey: string): void {
+    try {
+      const envPath = path.join(process.cwd(), '.env');
+      if (!fs.existsSync(envPath)) return;
+      let content = fs.readFileSync(envPath, 'utf8');
+      if (/^LICENSE_KEY=/m.test(content)) {
+        content = content.replace(/^LICENSE_KEY=.*$/m, `LICENSE_KEY=${licenseKey}`);
+      } else {
+        content = content.trimEnd() + `\nLICENSE_KEY=${licenseKey}\n`;
+      }
+      fs.writeFileSync(envPath, content, 'utf8');
+      this.logger.log('License key persisted to .env');
+    } catch (e: any) {
+      this.logger.warn(`Could not persist license key to .env: ${e.message}`);
+    }
   }
 }
