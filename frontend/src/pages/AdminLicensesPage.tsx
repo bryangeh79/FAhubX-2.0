@@ -108,23 +108,24 @@ const AdminLicensesPage: React.FC = () => {
     try { values = await createForm.validateFields(); } catch { return; }
     setCreateLoading(true);
     try {
+      // License Server expects camelCase; only maxScripts is accepted as override
+      // (maxAccounts and maxTasks are derived from plan by the License Server)
       const payload: any = {
-        tenant_name: values.tenant_name,
-        tenant_email: values.tenant_email || undefined,
-        tenant_username: values.tenant_username || undefined,
+        tenantName: values.tenant_name,
         plan: values.plan,
-        max_accounts: values.max_accounts,
-        max_tasks: values.max_tasks,
-        max_scripts: values.max_scripts,
-        notes: values.notes || undefined,
       };
+      if (values.tenant_email)    payload.tenantEmail    = values.tenant_email;
+      if (values.tenant_username) payload.tenantUsername = values.tenant_username;
+      if (values.max_scripts)     payload.maxScripts     = values.max_scripts;
+      if (values.notes)           payload.notes          = values.notes;
       if (values.expires_at) {
-        payload.expires_at = values.expires_at.toISOString();
-        payload.subscription_expiry = values.expires_at.toISOString();
+        payload.expiresAt          = values.expires_at.toISOString();
+        payload.subscriptionExpiry = values.expires_at.toISOString();
       }
       const res = await api.post('/admin/licenses', payload);
+      // License Server responds: { success: true, license: { licenseKey, ... } }
       const data = res.data?.data || res.data || {};
-      const key = data.license_key || data.key || data.licenseKey || '';
+      const key = data.license?.licenseKey || data.licenseKey || data.license_key || '';
       setCreating(false);
       createForm.resetFields();
       setCreatedKey(key);
