@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Delete, Body, Param, UseGuards, Request, Logger } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Body, Param, UseGuards, Request, Logger, ForbiddenException, ServiceUnavailableException, BadGatewayException } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -19,14 +19,19 @@ export class AdminLicensesController {
 
   private assertAdmin(req: any) {
     if (req.user?.role !== 'admin') {
-      throw Object.assign(new Error('无权限，仅管理员可操作'), { status: 403 });
+      throw new ForbiddenException('Access denied: admin role required.');
     }
   }
 
   private getServerConfig() {
     const url = this.configService.get('LICENSE_SERVER_URL', 'https://license.starbright-solutions.com');
     const key = this.configService.get('LICENSE_ADMIN_KEY', '');
-    if (!key) throw Object.assign(new Error('LICENSE_ADMIN_KEY 未配置'), { status: 500 });
+    if (!key) {
+      throw new ServiceUnavailableException(
+        'LICENSE_ADMIN_KEY is not configured. ' +
+        'Add LICENSE_ADMIN_KEY=<your-admin-key> to backend/.env and restart the backend.',
+      );
+    }
     return { url, key };
   }
 
@@ -45,7 +50,7 @@ export class AdminLicensesController {
       return res.data;
     } catch (err: any) {
       this.logger.error(`获取 License 列表失败: ${err.message}`);
-      throw Object.assign(new Error('License Server 连接失败'), { status: 502 });
+      throw new BadGatewayException('Cannot reach License Server: ' + err.message);
     }
   }
 
@@ -63,7 +68,7 @@ export class AdminLicensesController {
       });
       return res.data;
     } catch (err: any) {
-      throw Object.assign(new Error('License Server 连接失败'), { status: 502 });
+      throw new BadGatewayException('Cannot reach License Server: ' + err.message);
     }
   }
 
@@ -82,7 +87,7 @@ export class AdminLicensesController {
       this.logger.log(`🔓 License ${id} 机器已解绑 (by admin ${req.user.email})`);
       return res.data;
     } catch (err: any) {
-      throw Object.assign(new Error('解绑失败：' + err.message), { status: 502 });
+      throw new BadGatewayException('Unbind failed: ' + err.message);
     }
   }
 
@@ -101,7 +106,7 @@ export class AdminLicensesController {
       this.logger.log(`✏️ License ${id} 已更新 (by admin ${req.user.email})`);
       return res.data;
     } catch (err: any) {
-      throw Object.assign(new Error('更新失败：' + err.message), { status: 502 });
+      throw new BadGatewayException('Update failed: ' + err.message);
     }
   }
 
@@ -120,7 +125,7 @@ export class AdminLicensesController {
       this.logger.log(`🗑️ License ${id} 已删除 (by admin ${req.user.email})`);
       return res.data;
     } catch (err: any) {
-      throw Object.assign(new Error('删除失败：' + err.message), { status: 502 });
+      throw new BadGatewayException('Delete failed: ' + err.message);
     }
   }
 }

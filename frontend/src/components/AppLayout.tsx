@@ -11,7 +11,6 @@ import {
 } from 'antd';
 import {
   UserOutlined,
-  GlobalOutlined,
   MessageOutlined,
   SafetyOutlined,
   LogoutOutlined,
@@ -21,7 +20,6 @@ import {
   DashboardOutlined,
   MonitorOutlined,
   CrownOutlined,
-  TeamOutlined,
   FileTextOutlined,
 } from '@ant-design/icons';
 import { useAuth } from '../store/authStore';
@@ -31,7 +29,7 @@ import { useT } from '../i18n';
 import LanguageSwitcher from './LanguageSwitcher';
 
 // App version — bump this when releasing a new installer
-const APP_VERSION = '1.4.2';
+const APP_VERSION = '2.0.0';
 
 const { Header, Content, Sider } = Layout;
 const { Text } = Typography;
@@ -149,16 +147,10 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
 
   const adminOnlyItems = [
     { type: 'divider' as const },
-    {
-      key: 'admin-users',
-      icon: React.createElement(TeamOutlined),
-      label: t('nav.adminUsers'),
-      onClick: () => navigate('/admin/users'),
-      style: { color: '#722ed1' },
-    },
+    // TODO(2.0): admin-users route disabled (Phase 5C) — multi-tenant SaaS admin not needed in local mode
     {
       key: 'admin-licenses',
-      icon: React.createElement(SafetyOutlined),
+      icon: React.createElement(CrownOutlined),
       label: t('nav.adminLicenses'),
       onClick: () => navigate('/admin/licenses'),
       style: { color: '#722ed1' },

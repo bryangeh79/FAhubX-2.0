@@ -5,11 +5,11 @@
 import React, { useState, useEffect } from 'react';
 import {
   Table, Button, Modal, Form, Input, DatePicker, Select, Tag, Space,
-  Typography, message, Card, Row, Col, Statistic, Popconfirm, Tooltip,
+  Typography, message, Card, Row, Col, Statistic, Popconfirm, Tooltip, Alert,
 } from 'antd';
 import {
   ReloadOutlined, DisconnectOutlined, EditOutlined, DeleteOutlined,
-  KeyOutlined, DesktopOutlined,
+  KeyOutlined, DesktopOutlined, WarningOutlined,
 } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import AppLayout from '../components/AppLayout';
@@ -53,10 +53,12 @@ const AdminLicensesPage: React.FC = () => {
   const [licenses, setLicenses] = useState<License[]>([]);
   const [dashboard, setDashboard] = useState<Dashboard | null>(null);
   const [editing, setEditing] = useState<License | null>(null);
+  const [configError, setConfigError] = useState<string | null>(null);
   const [form] = Form.useForm();
 
   const loadData = async () => {
     setLoading(true);
+    setConfigError(null);
     try {
       const [licRes, statRes] = await Promise.all([
         api.get('/admin/licenses'),
@@ -65,7 +67,18 @@ const AdminLicensesPage: React.FC = () => {
       setLicenses(licRes.data?.data?.licenses || licRes.data?.licenses || []);
       setDashboard(statRes.data?.data || statRes.data || null);
     } catch (err: any) {
-      message.error(`${t('adminLicenses.fetchFailed')}: ${err.response?.data?.message || err.message}`);
+      const status = err.response?.status;
+      const msg = err.response?.data?.message || err.message || 'Unknown error';
+      // 503 = LICENSE_ADMIN_KEY not configured; show friendly in-page alert
+      if (status === 503 || (msg && msg.includes('LICENSE_ADMIN_KEY'))) {
+        setConfigError(
+          'License Server admin key is not configured. ' +
+          'Add LICENSE_ADMIN_KEY=<your-admin-api-key> to backend/.env and restart the backend. ' +
+          'You can find the admin key in your Cloudflare License Server settings.'
+        );
+      } else {
+        message.error(`${t('adminLicenses.fetchFailed')}: ${msg}`);
+      }
     } finally {
       setLoading(false);
     }
@@ -230,6 +243,22 @@ const AdminLicensesPage: React.FC = () => {
           </div>
           <Button icon={<ReloadOutlined />} onClick={loadData} loading={loading}>{t('adminLicenses.refresh')}</Button>
         </div>
+
+        {configError && (
+          <Alert
+            type="warning"
+            showIcon
+            icon={<WarningOutlined />}
+            message="License Server Not Configured"
+            description={configError}
+            style={{ marginBottom: 24 }}
+            action={
+              <Button size="small" onClick={loadData} icon={<ReloadOutlined />}>
+                Retry
+              </Button>
+            }
+          />
+        )}
 
         {dashboard && (
           <Row gutter={16} style={{ marginBottom: 24 }}>
