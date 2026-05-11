@@ -64,6 +64,26 @@ if errorlevel 1 (
     exit /b 1
 )
 
+:: Step 3.5: Download Chromium for bundling (idempotent — skips if already present)
+echo [3.5/5] Ensuring Chromium is bundled for offline install...
+cd /d "%BACKEND_DIR%"
+set PUPPETEER_CACHE_DIR=%BACKEND_DIR%\puppeteer-cache
+set CHROME_FOUND=
+if not exist "%PUPPETEER_CACHE_DIR%" goto :do_chrome_download
+for /r "%PUPPETEER_CACHE_DIR%" %%F in (chrome.exe) do set CHROME_FOUND=%%F
+if defined CHROME_FOUND goto :chrome_ready
+:do_chrome_download
+echo   chrome.exe not found in puppeteer-cache. Downloading Chromium (~200 MB)...
+set PUPPETEER_SKIP_DOWNLOAD=
+call npx puppeteer browsers install chrome
+if errorlevel 1 (
+    echo ERROR: Chromium download failed. Check internet connection and retry.
+    exit /b 1
+)
+:chrome_ready
+echo   Chromium ready.
+set CHROME_FOUND=
+
 :: Step 4: Stage files
 echo [4/5] Staging backend files...
 if exist "%STAGING_DIR%" rmdir /s /q "%STAGING_DIR%"

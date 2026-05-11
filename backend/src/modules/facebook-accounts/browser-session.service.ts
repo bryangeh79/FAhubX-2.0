@@ -144,12 +144,18 @@ export class BrowserSessionService implements OnModuleDestroy {
       const StealthPlugin = require('puppeteer-extra-plugin-stealth');
       puppeteer.use(StealthPlugin());
 
+      // Resolve bundled Chrome path via core puppeteer (respects PUPPETEER_CACHE_DIR).
+      // puppeteer-extra does not expose executablePath(); must use the underlying package.
+      const executablePath: string = require('puppeteer').executablePath();
+      this.logger.log(`[${accountId}] Chrome executable: ${executablePath}`);
+
       const args = this.buildArgs(profileDir, options.proxyServer);
       const headless = options.headless ?? false;
 
       const browser = await puppeteer.launch({
         headless,
         args,
+        executablePath,
         defaultViewport: null,
         // 默认 30 秒太短，长时间聊天任务会触发 "Runtime.callFunctionOn timed out"。
         // 调到 3 分钟足够覆盖 FB 页面加载 + 各种交互。
