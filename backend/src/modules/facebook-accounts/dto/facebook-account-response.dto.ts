@@ -26,7 +26,7 @@ export class FacebookAccountResponseDto {
   accountType: 'user' | 'page' | 'business';
 
   @ApiProperty({ description: '账号状态', example: 'active', enum: ['active', 'expired', 'revoked', 'error'] })
-  status: 'active' | 'idle' | 'error' | 'disabled' | 'banned';
+  status: 'active' | 'idle' | 'error' | 'disabled' | 'banned' | 'suspicious' | 'cooling';
 
   @ApiProperty({ description: '是否已验证', example: true })
   verified: boolean;

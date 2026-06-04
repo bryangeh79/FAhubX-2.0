@@ -460,6 +460,12 @@ export class SimpleTasksController {
           const afterUrl = page.url();
           const stillOnLogin = afterUrl.includes('/login') || afterUrl.includes('login.php');
           if (!stillOnLogin) {
+            // Cookie 成功登入 —— 但 FB 也可能把你扔到 /checkpoint。扫一次 → 命中则把账号置 suspicious + 冷却 24h。
+            const cp = await this.browserSessionService.checkAndApplyCheckpoint(accountId, page, { closeOnDetect: false });
+            if (cp.detected) {
+              appendLog(taskId, 'error', `🚨 Cookie 登录后命中 FB checkpoint（${cp.kind}）：${cp.reason}。账号已冷却 24h。`);
+              return false;
+            }
             appendLog(taskId, 'success', '✅ Cookie 注入成功，已自动登录！');
             return true;
           }
@@ -512,11 +518,20 @@ export class SimpleTasksController {
       const finalUrl = page.url();
 
       if (finalUrl.includes('checkpoint') || finalUrl.includes('two_step') || finalUrl.includes('help')) {
-        appendLog(taskId, 'error', '❌ Facebook 需要安全验证（双因子验证/手机确认），请手动处理后重试');
+        // 把账号置 suspicious + cooldown 24h，避免再次硬刚导致永封
+        const cp = await this.browserSessionService.checkAndApplyCheckpoint(accountId, page, { closeOnDetect: false });
+        appendLog(taskId, 'error', `❌ Facebook 需要安全验证（${cp.kind || 'checkpoint'}）。账号已自动冷却 24h，期间不再启动浏览器。请手动处理后再用。`);
         return false;
       }
       if (finalUrl.includes('/login')) {
         appendLog(taskId, 'error', '❌ 密码登录失败，请检查密码是否正确');
+        return false;
+      }
+
+      // 登录看似成功 —— 但 FB 可能在 facebook.com/ 的 body 里挂了软警告对话框。再扫一次。
+      const cp = await this.browserSessionService.checkAndApplyCheckpoint(accountId, page, { closeOnDetect: false });
+      if (cp.detected) {
+        appendLog(taskId, 'error', `🚨 密码登录后命中 FB checkpoint（${cp.kind}）：${cp.reason}。账号已冷却 24h。`);
         return false;
       }
 
@@ -685,26 +700,35 @@ export class SimpleTasksController {
     if (accountIds.length === 0 && task.accountId) accountIds.push(task.accountId);
     if (accountIds.length === 0) return { success: false, message: '无法确定账号 ID' };
 
-    const puppeteer = await import('puppeteer');
+    // 旧实现裸 puppeteer.launch（无 stealth、无 profile、无 proxy）= FB 一眼识破 = checkpoint。
+    // 改为复用 BrowserSessionService 的 session（同 profile / proxy / stealth），把现有页面提到前台。
+    // 如果该账号当前没 session，按正常路径 launch 一个并把首页 facebook.com 显示出来。
     const opened: string[] = [];
-
-    // 为每个账号各自独立启动一个监控浏览器（不影响任务正在使用的 BrowserSession）
     for (const accountId of accountIds) {
       try {
         const [acc] = await this.dataSource.query(
           `SELECT name FROM facebook_accounts WHERE id = $1`, [accountId],
         );
 
-        const browser = await (puppeteer as any).default.launch({
+        const session = await this.browserSessionService.getOrLaunchSession(accountId, {
           headless: false,
-          args: ['--no-sandbox', '--disable-setuid-sandbox', '--start-maximized'],
-          defaultViewport: null,
+          userId: req.user.id,
         });
-        const page = await browser.newPage();
 
-        // 复用 ensureLoggedIn 完整流程：cookie 注入 → 失效则用账号密码自动登录
+        // 拿现有 pages，没有就开一个新的
+        let pages: any[] = [];
+        try { pages = await session.browser.pages(); } catch (_) {}
+        let page = pages[pages.length - 1];
+        if (!page || page.isClosed?.()) {
+          page = await this.browserSessionService.newPage(accountId);
+        }
+
+        // 如果当前页面不是 FB，做一次 ensureLoggedIn（cookie 注入 + 必要时自动登录）
         try {
-          await page.goto('https://www.facebook.com/', { waitUntil: 'domcontentloaded', timeout: 20000 }).catch(() => {});
+          const url = page.url ? page.url() : '';
+          if (!url.includes('facebook.com')) {
+            await page.goto('https://www.facebook.com/', { waitUntil: 'domcontentloaded', timeout: 20000 }).catch(() => {});
+          }
           const loggedIn = await this.ensureLoggedIn(page, accountId, id);
           if (!loggedIn) {
             appendLog(id, 'warn', `⚠️ 监控窗口：账号 ${acc?.name || accountId} 自动登录失败，请在窗口中手动输入密码`);
@@ -713,28 +737,20 @@ export class SimpleTasksController {
           appendLog(id, 'error', `⚠️ 监控窗口登录异常（${acc?.name || accountId}）：${e.message}`);
         }
 
-        // 存入 Map，任务完成时自动关闭；15 分钟兜底关闭
-        if (!this.monitorBrowsers.has(id)) this.monitorBrowsers.set(id, []);
-        this.monitorBrowsers.get(id)!.push(browser);
-        setTimeout(() => {
-          browser.close().catch(() => {});
-          // 清理 Map 中对应的引用
-          const list = this.monitorBrowsers.get(id);
-          if (list) {
-            const idx = list.indexOf(browser);
-            if (idx >= 0) list.splice(idx, 1);
-            if (list.length === 0) this.monitorBrowsers.delete(id);
-          }
-        }, 15 * 60 * 1000);
+        // 把页面提到前台让用户看见。bringToFront 不影响任务在其他页面继续跑。
+        try { await page.bringToFront(); } catch (_) {}
+
         opened.push(acc?.name || accountId);
-      } catch { /* 单个账号失败不影响其他账号 */ }
+      } catch (e: any) {
+        appendLog(id, 'error', `⚠️ 无法显示账号浏览器：${e.message}`);
+      }
     }
 
     if (opened.length === 0) return { success: false, message: '无法打开浏览器窗口' };
 
     return {
       success: true,
-      message: `已打开 ${opened.length} 个监控窗口：${opened.join('、')}（独立窗口，任务完成后自动关闭）`,
+      message: `已显示 ${opened.length} 个浏览器窗口：${opened.join('、')}（复用任务浏览器，关闭由任务生命周期接管）`,
     };
   }
 

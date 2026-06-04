@@ -72,10 +72,22 @@ export class FacebookAccount {
   @Column({ type: 'varchar', length: 20, default: 'user' })
   accountType: 'user' | 'page' | 'business';
 
-  @ApiProperty({ description: '账号状态', example: 'active', enum: ['active', 'idle', 'error', 'disabled', 'banned'] })
+  @ApiProperty({ description: '账号状态', example: 'active', enum: ['active', 'idle', 'error', 'disabled', 'banned', 'suspicious', 'cooling'] })
   @Column({ type: 'varchar', length: 20, default: 'active' })
   @Index('idx_facebook_accounts_status')
-  status: 'active' | 'idle' | 'error' | 'disabled' | 'banned';
+  status: 'active' | 'idle' | 'error' | 'disabled' | 'banned' | 'suspicious' | 'cooling';
+
+  @ApiProperty({ description: 'FB checkpoint 冷却到期时间（在此之前不允许 launch 浏览器）', required: false })
+  @Column({ type: 'timestamptz', nullable: true, name: 'cooldownUntil' })
+  cooldownUntil: Date | null;
+
+  @ApiProperty({ description: '最近一次触发 FB checkpoint 的时间', required: false })
+  @Column({ type: 'timestamptz', nullable: true, name: 'lastCheckpointAt' })
+  lastCheckpointAt: Date | null;
+
+  @ApiProperty({ description: 'checkpoint 触发原因（URL / 文案）', required: false })
+  @Column({ type: 'text', nullable: true, name: 'checkpointReason' })
+  checkpointReason: string | null;
 
   @ApiProperty({ description: '是否已验证', example: true })
   @Column({ type: 'boolean', default: false })

@@ -88,10 +88,12 @@ Filename: "{app}\{#MyAppExeName}"; Description: "Launch FAhubX"; Flags: nowait p
 Filename: "{app}\stop.bat"; Parameters: ""; Flags: runhidden waituntilterminated; RunOnceId: "StopServices"
 
 [UninstallDelete]
+; logs 永远删（不含用户数据，且重装会重建）
 Type: filesandordirs; Name: "{app}\logs"
-Type: filesandordirs; Name: "{app}\data"
-Type: filesandordirs; Name: "{app}\pgsql\data"
-Type: files; Name: "{app}\backend\.env"
+; 下面这些只在用户选"彻底删除"时才删 —— 保留则 FB 账号 / 登录态 / VPN / 任务历史 / License 状态都还在
+Type: filesandordirs; Name: "{app}\data"; Check: UninstallDeleteAllDataCheck
+Type: filesandordirs; Name: "{app}\pgsql\data"; Check: UninstallDeleteAllDataCheck
+Type: files; Name: "{app}\backend\.env"; Check: UninstallDeleteAllDataCheck
 
 [Code]
 var
@@ -100,6 +102,8 @@ var
   AppPortEdit: TNewEdit;
   PgPortEdit: TNewEdit;
   RedisPortEdit: TNewEdit;
+  // 卸载时是否同时删除所有用户数据（默认 False = 保留）
+  UninstallDeleteAllData: Boolean;
 
 procedure InitializeWizard();
 var
@@ -268,4 +272,45 @@ begin
       Exec(StopScript, '', ExpandConstant('{app}'), SW_HIDE, ewWaitUntilTerminated, ResultCode);
     end;
   end;
+end;
+
+// ============================================================
+// 卸载流程：问用户是保留数据还是彻底删除
+// 在显示 Inno 自带"确定要卸载吗?"对话框之前先弹一次三选项对话框：
+//   是  → 保留数据（Facebook 账号、登录态、VPN、任务历史、License）
+//   否  → 彻底删除所有数据
+//   取消 → 取消卸载
+// 选择被存到全局变量 UninstallDeleteAllData，下面的 Check 函数据此决定是否删 data 目录。
+// ============================================================
+function InitializeUninstall(): Boolean;
+var
+  Choice: Integer;
+begin
+  UninstallDeleteAllData := False;
+  Choice := MsgBox(
+    '是否保留 FAhubX 数据？' + #13#10 +
+    'Keep FAhubX data?' + #13#10 + #13#10 +
+    '【是 / Yes】保留数据（推荐）' + #13#10 +
+    '  Keep: Facebook 账号、登录态(cookies)、VPN 配置、任务历史、License 激活' + #13#10 +
+    '  适合：重装升级、暂时卸载' + #13#10 + #13#10 +
+    '【否 / No】彻底删除所有数据' + #13#10 +
+    '  Delete EVERYTHING — 不可恢复，原 License Key 需联系管理员重新解绑' + #13#10 +
+    '  适合：彻底卸载，不再使用' + #13#10 + #13#10 +
+    '【取消 / Cancel】取消本次卸载',
+    mbConfirmation,
+    MB_YESNOCANCEL);
+  if Choice = IDCANCEL then
+  begin
+    Result := False;
+    Exit;
+  end;
+  if Choice = IDNO then
+    UninstallDeleteAllData := True;
+  Result := True;
+end;
+
+// 给 [UninstallDelete] 的 Check: 用 —— 返回 True 时对应条目才会被删
+function UninstallDeleteAllDataCheck(): Boolean;
+begin
+  Result := UninstallDeleteAllData;
 end;
