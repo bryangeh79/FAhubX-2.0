@@ -29,7 +29,7 @@ import { useT } from '../i18n';
 import LanguageSwitcher from './LanguageSwitcher';
 
 // App version — bump this when releasing a new installer
-const APP_VERSION = '2.0.0';
+const APP_VERSION = '2.0.1';
 
 const { Header, Content, Sider } = Layout;
 const { Text } = Typography;
